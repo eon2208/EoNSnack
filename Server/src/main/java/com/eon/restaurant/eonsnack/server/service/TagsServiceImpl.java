@@ -1,0 +1,43 @@
+package com.eon.restaurant.eonsnack.server.service;
+
+import com.eon.restaurant.eonsnack.server.entity.Restaurant;
+import com.eon.restaurant.eonsnack.server.entity.Tags;
+import com.eon.restaurant.eonsnack.server.repository.TagsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class TagsServiceImpl implements TagsService {
+
+    @Autowired
+    private TagsRepository tagsRepository;
+
+    @Override
+    public boolean existsByName(String tagName) {
+        return tagsRepository.existsByName(tagName);
+    }
+
+    @Override
+    public Tags getByName(String tagName) {
+        return tagsRepository.findByName(tagName);
+    }
+
+    @Override
+    public List<Tags> findAll() {
+        return tagsRepository.findAll();
+    }
+
+    @Override
+    public Optional<Tags> findById(int id) {
+        return tagsRepository.findById(id);
+    }
+
+    @Override
+    public void save(Tags tag) {
+        tagsRepository.save(tag);
+    }
+
+}

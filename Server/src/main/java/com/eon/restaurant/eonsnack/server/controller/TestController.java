@@ -1,0 +1,52 @@
+package com.eon.restaurant.eonsnack.server.controller;
+
+import com.eon.restaurant.eonsnack.server.client.RestaurantMenuClient;
+import com.eon.restaurant.eonsnack.server.model.JSONParse.UserResponse;
+import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantList.RestaurantsList;
+import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantMeals.RestaurantJsonItem;
+import com.eon.restaurant.eonsnack.server.service.RestaurantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/test")
+public class TestController {
+
+    private final RestaurantMenuClient restaurantMenuClient;
+
+    private final RestaurantService restaurantService;
+
+    @Autowired
+    public TestController(RestaurantMenuClient restaurantMenuClient, RestaurantService restaurantService) {
+        this.restaurantMenuClient = restaurantMenuClient;
+        this.restaurantService = restaurantService;
+    }
+
+    @GetMapping("/restaurant/{id}")
+    public ResponseEntity<RestaurantJsonItem> menuItem(@PathVariable("id") long id) {
+        return ResponseEntity.ok().body(restaurantMenuClient.getJSONRestaurantWithId(id));
+    }
+
+    @GetMapping("/add/{id}")
+    public ResponseEntity<String> saveRestaurant(@PathVariable("id") long id) {
+        restaurantService.saveRestaurantFromJSON(id);
+
+        return new ResponseEntity<>("Restaurant added : " + id, HttpStatus.OK);
+    }
+
+    @GetMapping("/list/{page}")
+    public ResponseEntity<RestaurantsList> restaurantsListResponseEntity(@PathVariable("page") int page){
+        return ResponseEntity.ok().body(restaurantMenuClient.getJsonRestaurantsList(page));
+    }
+
+    @GetMapping("/list/{page}/add")
+    public ResponseEntity<String> addListOfRestaurants(@PathVariable("page") int page) {
+        restaurantMenuClient.saveRestaurantsPage(page);
+
+        return new ResponseEntity<>("Page Added!" , HttpStatus.OK);
+    }
+
+
+}
