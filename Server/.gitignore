@@ -34,3 +34,7 @@ build/
 /src/main/resources/application.properties
 /src/main/java/com/eon/restaurant/eonsnack/server/controller/WebController.java
 /src/main/java/com/eon/restaurant/eonsnack/server/controller/HalLinksController/
+src/main/java/com/eon/restaurant/eonsnack/server/resources/
+src/main/java/com/eon/restaurant/eonsnack/server/security/
+src/main/resources/static/
+src/main/resources/templates/
