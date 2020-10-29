@@ -25,6 +25,12 @@ public class MealServiceImpl implements MealService{
     }
 
     @Override
+    public List<Meal> findAllByRestaurantIdAndTagsId(long restId, int tagId) {
+        return mealRepository.findAllByRestaurantIdAndTagsId(restId, tagId);
+
+    }
+
+    @Override
     public List<Meal> findAllByRestaurantId(long id) {
         return mealRepository.findAllByRestaurantId(id);
     }

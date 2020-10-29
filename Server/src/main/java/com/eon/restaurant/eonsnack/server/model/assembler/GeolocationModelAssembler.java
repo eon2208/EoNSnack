@@ -1,6 +1,6 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
-import com.eon.restaurant.eonsnack.server.controller.HalLinksController.GeolocationController;
+import com.eon.restaurant.eonsnack.server.controller.GeolocationController;
 import com.eon.restaurant.eonsnack.server.controller.WebController;
 import com.eon.restaurant.eonsnack.server.entity.Geolocation;
 import com.eon.restaurant.eonsnack.server.model.GeolocationModel;

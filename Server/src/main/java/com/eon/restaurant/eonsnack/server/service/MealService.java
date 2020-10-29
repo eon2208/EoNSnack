@@ -11,5 +11,7 @@ public interface MealService {
 
     Optional<Meal> findById(long id);
 
+    List<Meal> findAllByRestaurantIdAndTagsId(long restId, int tagId);
+
     List<Meal> findAllByRestaurantId(long id);
 }

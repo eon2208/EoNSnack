@@ -1,1 +1,11 @@
-<p>restaurant-cuisines works!</p>
+<div class="menu-sidebar-content js-scrollbar1">
+  <nav class="navbar-sidebar">
+    <ul class="list-unstyled navbar-list">
+      <li *ngFor="let tempRestaurantCuisines of cuisines">
+        <a routerLink="/cuisine/{{tempRestaurantCuisines.id}}" routerLinkActive="active-link">
+           {{tempRestaurantCuisines.name}}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

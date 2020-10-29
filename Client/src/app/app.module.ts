@@ -8,6 +8,26 @@ import { MealsListComponent } from './components/meals-list/meals-list.component
 import { SearchComponent } from './components/search/search.component';
 import { RestaurantCuisinesComponent } from './components/restaurant-cuisines/restaurant-cuisines.component';
 import { RestaurantMealsComponent } from './components/restaurant-meals/restaurant-meals.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import {Routes} from '@angular/router';
+
+const routes: Routes = [
+  {path: 'cuisine/:id', component: RestaurantsListComponent},
+  {path: '', redirectTo: '/restaurants', pathMatch: 'full'},
+  {path: '**', redirectTo: '/restaurants', pathMatch: 'full'}
+  /*{path: 'products/:id', component: ProductDetailsComponent},
+  {path: 'checkout', component: CheckoutComponent},
+  {path: 'cart-details', component: CartDetailsComponent},
+  {path: 'search/:keyword', component: ProductListComponent},
+  {path: 'category/:id', component: ProductListComponent},
+  {path: 'category', component: ProductListComponent},
+  {path: 'products', component: ProductListComponent},
+  {path: '', redirectTo: '/products', pathMatch: 'full'},
+  {path: '**', redirectTo: '/products', pathMatch: 'full'}*/
+  // {path: '**', component: PageNotFoundComponent}
+];
 
 @NgModule({
   declarations: [
@@ -16,11 +36,14 @@ import { RestaurantMealsComponent } from './components/restaurant-meals/restaura
     MealsListComponent,
     SearchComponent,
     RestaurantCuisinesComponent,
-    RestaurantMealsComponent
+    RestaurantMealsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

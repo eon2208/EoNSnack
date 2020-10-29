@@ -1,6 +1,6 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
-import com.eon.restaurant.eonsnack.server.controller.HalLinksController.RestaurantController;
+import com.eon.restaurant.eonsnack.server.controller.RestaurantController;
 import com.eon.restaurant.eonsnack.server.controller.WebController;
 import com.eon.restaurant.eonsnack.server.entity.Meal;
 import com.eon.restaurant.eonsnack.server.model.MealModel;
