@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Meal } from '../common/meal';
+import { Restaurant } from '../common/restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,20 @@ export class MealService {
   private getMealsForRestaurant(theRestaurantId: number,thePage: number, thePageSize: number): Observable<Meal> {
     
     const mealUrl = `${this.baseUrl}/search/findAllByRestaurantId/${theRestaurantId}&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<Meal>(mealUrl);
+  }
+
+  private getMealForRestaurantByTags(theRestaurantId: number, theTagId: number): Observable<GetResponseMeals> {
+
+    const url = `${this.baseUrl}/${theRestaurantId}/${theTagId}`;
+
+    return this.httpClient.get<GetResponseMeals>(url)
+  }
+
+  private getMeal(theMealId: number): Observable<Meal> {
+
+    const mealUrl = `${this.baseUrl}/${theMealId}`;
 
     return this.httpClient.get<Meal>(mealUrl);
   }

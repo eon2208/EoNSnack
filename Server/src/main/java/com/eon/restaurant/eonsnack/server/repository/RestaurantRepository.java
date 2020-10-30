@@ -19,4 +19,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findByAddress_Id(int id);
 
     List<Restaurant> findByRestNameContaining(@RequestParam("name") String name);
+
+    List<Restaurant> findAllByCuisinesList
 }
