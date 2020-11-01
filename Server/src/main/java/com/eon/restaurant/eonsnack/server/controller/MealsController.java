@@ -35,4 +35,6 @@ public class MealsController {
 
         return new ResponseEntity<>(mealModelAssembler.toCollectionModel(mealList), HttpStatus.OK);
     }
+
+
 }

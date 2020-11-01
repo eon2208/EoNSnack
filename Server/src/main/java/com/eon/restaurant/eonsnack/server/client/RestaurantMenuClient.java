@@ -3,6 +3,7 @@ package com.eon.restaurant.eonsnack.server.client;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantList.RestaurantsList;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantList.Result;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantMeals.RestaurantJsonItem;
+import com.eon.restaurant.eonsnack.server.service.JsonToEntity;
 import com.eon.restaurant.eonsnack.server.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,9 @@ public class RestaurantMenuClient {
 
     @Autowired
     private RestaurantService restaurantService;
+
+    @Autowired
+    private JsonToEntity jsonToEntity;
 
     @Value("${rapidapi.restaurant.url}")
     String restaurantUrl;
@@ -84,7 +88,7 @@ public class RestaurantMenuClient {
         List<Result> restaurantObject = restaurantsList.getResult().getData();
         for(Result result : restaurantObject){
             if(!restaurantIsInDatabase(result)){
-                restaurantService.saveRestaurantFromJSON(result.getRestaurantId());
+                jsonToEntity.saveRestaurantFromJSON(result.getRestaurantId());
             }
             else
                 logger.info("restaurant already exists");
@@ -92,13 +96,13 @@ public class RestaurantMenuClient {
     }
 
     private void existsInDatabase(List<Result> data) {
-
         for(Result result : data){
             result.setDatabase(restaurantIsInDatabase(result));
         }
     }
 
     private boolean restaurantIsInDatabase(Result result) {
+
         return restaurantService.existsById((long)result.getRestaurantId());
     }
 

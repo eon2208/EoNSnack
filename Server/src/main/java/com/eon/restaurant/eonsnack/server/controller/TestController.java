@@ -1,7 +1,7 @@
 package com.eon.restaurant.eonsnack.server.controller;
 
+import com.eon.restaurant.eonsnack.server.service.JsonToEntityImpl;
 import com.eon.restaurant.eonsnack.server.client.RestaurantMenuClient;
-import com.eon.restaurant.eonsnack.server.model.JSONParse.UserResponse;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantList.RestaurantsList;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantMeals.RestaurantJsonItem;
 import com.eon.restaurant.eonsnack.server.service.RestaurantService;
@@ -16,12 +16,13 @@ public class TestController {
 
     private final RestaurantMenuClient restaurantMenuClient;
 
-    private final RestaurantService restaurantService;
+    private final JsonToEntityImpl jsonToEntity;
+
 
     @Autowired
-    public TestController(RestaurantMenuClient restaurantMenuClient, RestaurantService restaurantService) {
+    public TestController(RestaurantMenuClient restaurantMenuClient, RestaurantService restaurantService, JsonToEntityImpl jsonToEntity) {
         this.restaurantMenuClient = restaurantMenuClient;
-        this.restaurantService = restaurantService;
+        this.jsonToEntity = jsonToEntity;
     }
 
     @GetMapping("/restaurant/{id}")
@@ -31,7 +32,7 @@ public class TestController {
 
     @GetMapping("/add/{id}")
     public ResponseEntity<String> saveRestaurant(@PathVariable("id") long id) {
-        restaurantService.saveRestaurantFromJSON(id);
+        jsonToEntity.saveRestaurantFromJSON(id);
 
         return new ResponseEntity<>("Restaurant added : " + id, HttpStatus.OK);
     }

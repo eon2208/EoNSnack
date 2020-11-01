@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface RestaurantService {
 
-    void saveRestaurantFromJSON(long id);
+    void save(Restaurant restaurant);
 
     Optional<Restaurant> findById(long id);
 
