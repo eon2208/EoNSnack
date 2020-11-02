@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Restaurant } from '../common/restaurant';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,28 @@ import { Observable } from 'rxjs';
 export class RestaurantService {
 
   private baseUrl = 'http://localhost:8080/api/restaurants';
+  private cuisinesUrl = 'http://localhost:8080/api/cuisines';
 
   constructor(private httpClient: HttpClient) { }
 
-  getRestaurantsListPaginate(thePage: number, thePageSize: number, theCategoryId: number): Observable<GetResponseRestaurant> {
-    const url = `${this.baseUrl}`
+  private getRestaurants(searchUrl: string){
+    
+    return this.httpClient.get<GetResponseRestaurant>(searchUrl).pipe(
+      map(response => response._embedded.restaurants)
+    )
   }
 
-  getRestaurantsListByCuisines(theCuisineId: number): Observable<GetResponseRestaurant> {
+  getRestaurantsListPaginate(thePage: number, thePageSize: number): Observable<GetResponseRestaurant> {
+    const url = `${this.baseUrl}?page=${thePage}&size=${thePageSize}`;
 
-    const url = ``
+    return this.httpClient.get<GetResponseRestaurant>(url)
+  }
 
+  getRestaurantsListByCuisines(theCuisineId: number): Observable<Restaurant[]> {
+
+    const url = `${this.cuisinesUrl}/${theCuisineId}/restaurant`;
+
+    return this.getRestaurants(url);
   }
 
 }

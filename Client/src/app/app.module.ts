@@ -12,9 +12,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import {Routes} from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 
 const routes: Routes = [
-  {path: 'cuisine/:id', component: RestaurantsListComponent},
+  {path: 'cuisine/:cuisineId', component: RestaurantsListComponent},
+  {path: 'restaurants', component: RestaurantsListComponent},
   {path: '', redirectTo: '/restaurants', pathMatch: 'full'},
   {path: '**', redirectTo: '/restaurants', pathMatch: 'full'}
   /*{path: 'products/:id', component: ProductDetailsComponent},
@@ -43,7 +47,10 @@ const routes: Routes = [
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot({ extras: { lazyRender: true } }),
+    FormlyBootstrapModule
   ],
   providers: [],
   bootstrap: [AppComponent]

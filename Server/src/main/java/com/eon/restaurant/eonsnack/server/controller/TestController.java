@@ -20,7 +20,7 @@ public class TestController {
 
 
     @Autowired
-    public TestController(RestaurantMenuClient restaurantMenuClient, RestaurantService restaurantService, JsonToEntityImpl jsonToEntity) {
+    public TestController(RestaurantMenuClient restaurantMenuClient, JsonToEntityImpl jsonToEntity) {
         this.restaurantMenuClient = restaurantMenuClient;
         this.jsonToEntity = jsonToEntity;
     }
@@ -38,7 +38,7 @@ public class TestController {
     }
 
     @GetMapping("/list/{page}")
-    public ResponseEntity<RestaurantsList> restaurantsListResponseEntity(@PathVariable("page") int page){
+    public ResponseEntity<RestaurantsList> restaurantsListResponseEntity(@PathVariable("page") int page) {
         return ResponseEntity.ok().body(restaurantMenuClient.getJsonRestaurantsList(page));
     }
 
@@ -46,7 +46,7 @@ public class TestController {
     public ResponseEntity<String> addListOfRestaurants(@PathVariable("page") int page) {
         restaurantMenuClient.saveRestaurantsPage(page);
 
-        return new ResponseEntity<>("Page Added!" , HttpStatus.OK);
+        return new ResponseEntity<>("Page Added!", HttpStatus.OK);
     }
 
 
