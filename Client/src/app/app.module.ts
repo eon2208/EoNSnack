@@ -15,6 +15,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 const routes: Routes = [
   {path: 'cuisine/:id', component: RestaurantsListComponent},
@@ -52,7 +53,8 @@ const routes: Routes = [
     NgbModule,
     ReactiveFormsModule,
     FormlyModule.forRoot({ extras: { lazyRender: true } }),
-    FormlyBootstrapModule
+    FormlyBootstrapModule,
+    FormlyMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

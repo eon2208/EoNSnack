@@ -15,13 +15,13 @@ export class CuisinesService {
 
   getCuisines(): Observable<Cuisines[]> {
     return this.httpClient.get<GetResponseCuisines>(this.baseUrl).pipe(
-      map(response => response._embedded.cuisine)
+      map(response => response._embedded.cuisines)
     );
   }
 }
 
 interface GetResponseCuisines {
   _embedded: {
-    cuisine: Cuisines[];
+    cuisines: Cuisines[];
   };
 }

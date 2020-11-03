@@ -13,7 +13,7 @@ export class RestaurantsListComponent implements OnInit {
   restaurants: Restaurant[] = [];
 
   thePageNumber:number = 1;
-  thePageSize: number = 5;
+  thePageSize: number = 20;
   theTotalElements: number = 0;
 
   currentCuisineId : number = 1;
