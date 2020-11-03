@@ -37,7 +37,6 @@ public class AddressController {
     @GetMapping("/")
     public ResponseEntity<CollectionModel<AddressModel>> getAllAddresses() {
         List<Address> addresses = addressService.findAll();
-
         return new ResponseEntity<>(addressModelAssembler.toCollectionModel(addresses), HttpStatus.OK);
     }
 
