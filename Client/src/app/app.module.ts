@@ -11,14 +11,15 @@ import { RestaurantMealsComponent } from './components/restaurant-meals/restaura
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import {Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 
 const routes: Routes = [
-  {path: 'cuisine/:cuisineId', component: RestaurantsListComponent},
+  {path: 'cuisine/:id', component: RestaurantsListComponent},
   {path: 'restaurants', component: RestaurantsListComponent},
+  {path: 'cuisines', component: RestaurantsListComponent},
   {path: '', redirectTo: '/restaurants', pathMatch: 'full'},
   {path: '**', redirectTo: '/restaurants', pathMatch: 'full'}
   /*{path: 'products/:id', component: ProductDetailsComponent},
@@ -44,6 +45,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes),
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,

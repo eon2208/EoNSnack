@@ -27,11 +27,11 @@ export class RestaurantService {
     return this.httpClient.get<GetResponseRestaurant>(url)
   }
 
-  getRestaurantsListByCuisines(theCuisineId: number): Observable<Restaurant[]> {
+  getRestaurantsListByCuisines(theCuisineId: number): Observable<GetResponseRestaurant> {
 
     const url = `${this.cuisinesUrl}/${theCuisineId}/restaurant`;
 
-    return this.getRestaurants(url);
+    return this.httpClient.get<GetResponseRestaurant>(url);
   }
 
 }

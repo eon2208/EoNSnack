@@ -28,7 +28,7 @@ public class MealsController {
         this.mealModelAssembler = mealModelAssembler;
     }
 
-    @GetMapping("/meals/{restId}/{tagId}")
+    @GetMapping("meals/{restId}/{tagId}")
     public ResponseEntity<CollectionModel<MealModel>> getMealsForRestaurantAndTag(
             @PathVariable("restId") long restId, @PathVariable("tagId") int tagId){
         List<Meal> mealList = mealService.findAllByRestaurantIdAndTagsId(restId,tagId);
