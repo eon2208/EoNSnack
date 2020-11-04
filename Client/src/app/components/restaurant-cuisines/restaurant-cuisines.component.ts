@@ -10,6 +10,7 @@ import {CuisinesService} from '../../services/cuisines.service';
 export class RestaurantCuisinesComponent implements OnInit {
 
   cuisines: Cuisines[];
+  isChecked: boolean = true;
 
   constructor(private cuisinesService: CuisinesService) { }
 

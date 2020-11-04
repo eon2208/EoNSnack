@@ -26,12 +26,10 @@ public class AddressController {
 
     private final AddressService addressService;
     private final AddressModelAssembler addressModelAssembler;
-    private final RestaurantService restaurantService;
 
-    public AddressController(AddressService addressService, AddressModelAssembler addressModelAssembler, RestaurantService restaurantService) {
+    public AddressController(AddressService addressService, AddressModelAssembler addressModelAssembler) {
         this.addressService = addressService;
         this.addressModelAssembler = addressModelAssembler;
-        this.restaurantService = restaurantService;
     }
 
     @GetMapping("/")

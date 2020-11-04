@@ -1,7 +1,6 @@
 package com.eon.restaurant.eonsnack.server.entity;
 
 import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;

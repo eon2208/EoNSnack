@@ -1,11 +1,9 @@
-<p>restaurants-list works!</p>
+<div *ngFor="let tempRest of restaurants" class="container">
 
-<div *ngFor="let tempRest of restaurants" class="col-md-3">
-
-    <div class="product-box">
-
-        <h1>{{ tempRest.restName }}</h1>
-    
+    <div class="container">
+      <mat-card>
+       <h3>{{ tempRest.restName }}</h3>
+      </mat-card>
     </div>
 
   </div>
