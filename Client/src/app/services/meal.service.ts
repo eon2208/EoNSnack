@@ -21,21 +21,27 @@ export class MealService {
     )
   }
 
-  private getMealsForRestaurant(theRestaurantId: number,thePage: number, thePageSize: number): Observable<Meal> {
+  getMealListPaginate(thePage: number, thePageSize: number): Observable<GetResponseMeals> {
+    const url = `${this.baseUrl}?page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<GetResponseMeals>(url)
+  }
+
+  getMealsForRestaurant(theRestaurantId: number,thePage: number, thePageSize: number): Observable<Meal> {
     
     const mealUrl = `${this.baseUrl}/search/findAllByRestaurantId/${theRestaurantId}&page=${thePage}&size=${thePageSize}`;
 
     return this.httpClient.get<Meal>(mealUrl);
   }
 
-  private getMealForRestaurantByTags(theRestaurantId: number, theTagId: number): Observable<GetResponseMeals> {
+  getMealForRestaurantByTags(theRestaurantId: number, theTagId: number): Observable<GetResponseMeals> {
 
     const url = `${this.baseUrl}/${theRestaurantId}/${theTagId}`;
 
     return this.httpClient.get<GetResponseMeals>(url)
   }
 
-  private getMeal(theMealId: number): Observable<Meal> {
+  getMeal(theMealId: number): Observable<Meal> {
 
     const mealUrl = `${this.baseUrl}/${theMealId}`;
 

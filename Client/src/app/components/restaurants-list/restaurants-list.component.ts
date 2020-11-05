@@ -37,10 +37,10 @@ export class RestaurantsListComponent implements OnInit {
 
   private handleListRestaurants() {
 
-    const hasCuisineId: boolean = this.route.snapshot.paramMap.has('id');
+    const hasCuisineId: boolean = this.route.snapshot.paramMap.has('cuisineId');
 
     if(hasCuisineId){
-      this.currentCuisineId = +this.route.snapshot.paramMap.get('id');
+      this.currentCuisineId = +this.route.snapshot.paramMap.get('cuisineId');
       this.restaurantService.getRestaurantsListByCuisines(this.currentCuisineId).subscribe(
         this.processPickResult()
       );

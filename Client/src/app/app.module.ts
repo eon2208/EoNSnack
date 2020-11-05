@@ -34,7 +34,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { from } from 'rxjs';
 
 const routes: Routes = [
-  { path: 'cuisine/:id', component: RestaurantsListComponent },
+  { path: 'cuisine/:cuisineId', component: RestaurantsListComponent },
   { path: 'restaurants', component: RestaurantsListComponent },
   { path: 'cuisines', component: RestaurantsListComponent },
   { path: 'meals', component: MealsListComponent },
