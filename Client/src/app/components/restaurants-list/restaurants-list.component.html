@@ -1,9 +1,20 @@
 <div *ngFor="let tempRest of restaurants" class="container">
 
-    <div class="container">
-      <mat-card>
-       <h3>{{ tempRest.restName }}</h3>
-      </mat-card>
-    </div>
-
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>{{tempRest.restName}}</mat-card-title>
+      <mat-card-subtitle>{{tempRest.restNumber}}</mat-card-subtitle>
+    </mat-card-header>
+    <div mat-card-image></div>
+    <mat-card-actions>
+      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-fab color="warn" aria-label="Example icon button with a heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-divider></mat-divider>
+</div>

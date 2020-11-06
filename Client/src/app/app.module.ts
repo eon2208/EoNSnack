@@ -18,24 +18,28 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatDatepickerModule } from '@angular/material/datepicker'
-import { MatDialogModule } from '@angular/material/dialog'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
-import { MatRadioModule } from '@angular/material/radio'
-import { MatSelectModule } from '@angular/material/select'
-import { MatButtonModule } from '@angular/material/button'
-import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatNativeDateModule } from '@angular/material/core'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatIconModule} from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormlyMatToggleModule } from '@ngx-formly/material/toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { from } from 'rxjs';
+import { RestaurantComponent } from './components/restaurant/restaurant.component';
 
 const routes: Routes = [
   { path: 'cuisine/:cuisineId', component: RestaurantsListComponent },
   { path: 'restaurants', component: RestaurantsListComponent },
+  { path: 'restaurant/:restaurantId', component: RestaurantComponent },
   { path: 'cuisines', component: RestaurantsListComponent },
   { path: 'meals', component: MealsListComponent },
   { path: 'tags', component: MealsListComponent },
@@ -59,7 +63,8 @@ const routes: Routes = [
     RestaurantsListComponent,
     MealsListComponent,
     SearchComponent,
-    RestaurantCuisinesComponent
+    RestaurantCuisinesComponent,
+    RestaurantComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +77,8 @@ const routes: Routes = [
 
     MatCheckboxModule,
     MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
     MatDialogModule,
     MatFormFieldModule,
     MatSlideToggleModule,
