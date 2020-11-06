@@ -25,7 +25,7 @@ public class CuisinesController {
     @Autowired
     private CuisinesModelAssembler cuisinesModelAssembler;
 
-    @GetMapping("/api/cuisines")
+    @GetMapping("/cuisine")
     public ResponseEntity<CollectionModel<CuisineModel>> getMealsForRestaurantAndTag(){
 
         List<Cuisines> cuisinesList = cuisinesService.findAll();

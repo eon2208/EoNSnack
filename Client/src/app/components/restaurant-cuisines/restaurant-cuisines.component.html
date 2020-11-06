@@ -1,6 +1,6 @@
 <mat-slide-toggle></mat-slide-toggle>
-<div class="menu-sidebar-content js-scrollbar1">
-  <nav class="navbar-sidebar">
+<div class="menu-sidebar-content js-scrollbar1">  
+
     <ul class="list-unstyled navbar-list">
       <li *ngFor="let tempRestaurantCuisines of cuisines">
         <a routerLink="/cuisine/{{tempRestaurantCuisines.id}}" routerLinkActive="active-link">
@@ -8,5 +8,7 @@
         </a>
       </li>
     </ul>
-  </nav>
+
+    <ngb-pagination [collectionSize]="theTotalElements" [(page)]="thePage" [pageSize]="thePageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+     (pageChange)="listRestaurantCuisines()"></ngb-pagination>
 </div>

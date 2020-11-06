@@ -13,15 +13,22 @@ export class CuisinesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCuisines(): Observable<Cuisines[]> {
-    return this.httpClient.get<GetResponseCuisines>(this.baseUrl).pipe(
-      map(response => response._embedded.cuisines)
-    );
+  getCuisinesListPaginate(thePage: number, thePageSize: number): Observable<GetResponseCuisines> {
+
+    const url = `${this.baseUrl}?page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<GetResponseCuisines>(url)
   }
 }
 
 interface GetResponseCuisines {
   _embedded: {
-    cuisines: Cuisines[];
-  };
+    cuisine: Cuisines[];
+  }
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    number: number
+  }
 }

@@ -12,20 +12,29 @@ export class RestaurantCuisinesComponent implements OnInit {
   cuisines: Cuisines[];
   isChecked: boolean = true;
 
+  thePage:number = 1;
+  thePageSize: number = 10;
+  theTotalElements: number = 0;
+
   constructor(private cuisinesService: CuisinesService) { }
 
   ngOnInit(): void {
     this.listRestaurantCuisines();
   }
 
-  private listRestaurantCuisines(): void {
+  listRestaurantCuisines(): void {
 
-    this.cuisinesService.getCuisines().subscribe(
-      data => {
-        console.log('Cuisines = ' + JSON.stringify(data));
-        this.cuisines = data;
-      }
+    this.cuisinesService.getCuisinesListPaginate(this.thePage - 1, this.thePageSize).subscribe(
+      this.processResult()
     );
   }
 
+  private processResult() {
+    return data => {
+      this.cuisines = data._embedded.cuisine;
+      this.thePage = data.page.number + 1;
+      this.thePageSize = data.page.size;
+      this.theTotalElements = data.page.totalElements;
+    };
+  }
 }

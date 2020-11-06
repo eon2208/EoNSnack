@@ -7,7 +7,6 @@ import { RestaurantsListComponent } from './components/restaurants-list/restaura
 import { MealsListComponent } from './components/meals-list/meals-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { RestaurantCuisinesComponent } from './components/restaurant-cuisines/restaurant-cuisines.component';
-import { RestaurantMealsComponent } from './components/restaurant-meals/restaurant-meals.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatNativeDateModule } from '@angular/material/core'
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormlyMatToggleModule } from '@ngx-formly/material/toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { from } from 'rxjs';
@@ -59,8 +59,7 @@ const routes: Routes = [
     RestaurantsListComponent,
     MealsListComponent,
     SearchComponent,
-    RestaurantCuisinesComponent,
-    RestaurantMealsComponent,
+    RestaurantCuisinesComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +80,7 @@ const routes: Routes = [
     MatSelectModule,
     MatDatepickerModule,
     BrowserAnimationsModule,
+    MatPaginatorModule,
 
     MatNativeDateModule,
     FormlyMatDatepickerModule,
