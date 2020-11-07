@@ -3,6 +3,7 @@ package com.eon.restaurant.eonsnack.server.service;
 import com.eon.restaurant.eonsnack.server.client.RestaurantMenuClient;
 import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.exception.RestaurantNotFoundException;
+import com.eon.restaurant.eonsnack.server.repository.MealRepository;
 import com.eon.restaurant.eonsnack.server.repository.RestaurantRepository;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantMeals.*;
 import org.slf4j.Logger;
@@ -19,11 +20,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
+    private final MealRepository mealRepository;
+
+
     Logger logger = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, MealRepository mealRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.mealRepository = mealRepository;
     }
 
     @Override
@@ -52,6 +57,17 @@ public class RestaurantServiceImpl implements RestaurantService {
         else throw new RestaurantNotFoundException(id);
 
         return restaurant;
+    }
+
+    @Override
+    public Restaurant getRestaurantForMealId(long id) {
+        Optional<Meal> result = mealRepository.findById(id);
+
+        Meal meal = null;
+        if(result.isPresent())
+            meal = result.get();
+
+        return meal.getRestaurant();
     }
 
     @Override

@@ -19,14 +19,16 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
@@ -83,6 +85,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatSlideToggleModule,
     MatInputModule,
+    MatGridListModule,
+    MatExpansionModule,
     MatRadioModule,
     MatSelectModule,
     MatDatepickerModule,

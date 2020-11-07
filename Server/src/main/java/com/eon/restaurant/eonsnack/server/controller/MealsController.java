@@ -1,6 +1,8 @@
 package com.eon.restaurant.eonsnack.server.controller;
 
 import com.eon.restaurant.eonsnack.server.entity.Meal;
+import com.eon.restaurant.eonsnack.server.entity.Restaurant;
+import com.eon.restaurant.eonsnack.server.model.AddressModel;
 import com.eon.restaurant.eonsnack.server.model.MealModel;
 import com.eon.restaurant.eonsnack.server.model.assembler.MealModelAssembler;
 import com.eon.restaurant.eonsnack.server.service.MealService;
@@ -9,12 +11,10 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RepositoryRestController
 @RequestMapping("/api")
@@ -35,6 +35,4 @@ public class MealsController {
 
         return new ResponseEntity<>(mealModelAssembler.toCollectionModel(mealList), HttpStatus.OK);
     }
-
-
 }
