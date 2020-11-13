@@ -27,7 +27,7 @@ import java.util.List;
 
 @Controller
 @RepositoryRestController
-@RequestMapping("/api")
+@RequestMapping("/tags")
 public class TagsController {
 
     private final TagsService tagsService;
