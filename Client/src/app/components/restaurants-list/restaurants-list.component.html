@@ -1,21 +1,26 @@
-<div *ngFor="let tempRest of restaurants" class="container">
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-restaurant-cuisines></app-restaurant-cuisines>
+  </mat-sidenav>
 
-  <mat-card>
-    <mat-card-header>
-      <div mat-card-avatar></div>
-      <mat-card-title>{{tempRest.restName}}</mat-card-title>
-      <mat-card-subtitle>{{tempRest.id}}</mat-card-subtitle>
-    </mat-card-header>
-    <div mat-card-image></div>
-    <mat-card-actions>
-      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
-        routerLink="/restaurant/{{tempRest.id}}" routerLinkActive="active-link">
-        <mat-icon>home</mat-icon>
-      </button>
-      <button mat-fab color="warn" aria-label="Example icon button with a heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-divider></mat-divider>
-</div>
+  <mat-sidenav-content>
+    <div *ngFor="let tempRest of restaurants" class="container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{tempRest.restName}}</mat-card-title>
+          <mat-card-subtitle>{{tempRest.restNumber}}</mat-card-subtitle>
+        </mat-card-header>
+        <div mat-card-image></div>
+        <mat-card-actions>
+          <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+            routerLink="/restaurant/{{tempRest.id}}" routerLinkActive="active-link">
+            <mat-icon>home</mat-icon>
+          </button>
+          <button mat-fab color="warn" aria-label="Example icon button with a heart icon">
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

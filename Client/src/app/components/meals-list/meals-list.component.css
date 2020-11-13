@@ -1,0 +1,8 @@
+.mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
+    flex-basis: 2;
+  }
+
+  .mat-expansion-panel-header-description {
+    display: flex;
+    justify-content: flex-end;
+  }

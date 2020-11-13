@@ -1,12 +1,15 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
-import com.eon.restaurant.eonsnack.server.controller.WebController;
+import com.eon.restaurant.eonsnack.server.controller.CuisinesController;
 import com.eon.restaurant.eonsnack.server.entity.Cuisines;
 import com.eon.restaurant.eonsnack.server.model.CuisineModel;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -15,7 +18,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class CuisinesModelAssembler extends RepresentationModelAssemblerSupport<Cuisines, CuisineModel> {
 
     public CuisinesModelAssembler() {
-        super(WebController.class, CuisineModel.class);
+        super(CuisinesController.class, CuisineModel.class);
     }
 
     @Override
@@ -24,7 +27,7 @@ public class CuisinesModelAssembler extends RepresentationModelAssemblerSupport<
         CuisineModel cuisinesModel = instantiateModel(entity);
 
         cuisinesModel.add(linkTo(
-                methodOn(WebController.class)
+                methodOn(CuisinesController.class)
                         .getCuisinesById(entity.getId()))
                 .withSelfRel());
 
@@ -36,11 +39,10 @@ public class CuisinesModelAssembler extends RepresentationModelAssemblerSupport<
     @Override
     public CollectionModel<CuisineModel> toCollectionModel(Iterable<? extends Cuisines> entities) {
 
-        CollectionModel<CuisineModel> cuisineModels = super.toCollectionModel(entities);
-
-        cuisineModels.add(linkTo(methodOn(WebController.class).getAllCuisines()).withSelfRel());
-
-        return cuisineModels;
+        return StreamSupport
+                .stream(entities.spliterator(), false)
+                .map(this::toModel)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), CollectionModel:: of));
     }
 
 

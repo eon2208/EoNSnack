@@ -31,6 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormlyMatToggleModule } from '@ngx-formly/material/toggle';
@@ -87,7 +88,7 @@ const routes: Routes = [
     MatInputModule,
     MatGridListModule,
     MatExpansionModule,
-    MatRadioModule,
+    MatSidenavModule,
     MatSelectModule,
     MatDatepickerModule,
     BrowserAnimationsModule,

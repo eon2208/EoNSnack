@@ -26,7 +26,7 @@ export class MealsListComponent implements OnInit {
     })
   }
 
-  private listMeals() {
+  listMeals() {
 
     this.handleListMeals();
   }

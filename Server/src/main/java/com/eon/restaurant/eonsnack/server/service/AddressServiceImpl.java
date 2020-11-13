@@ -3,6 +3,8 @@ package com.eon.restaurant.eonsnack.server.service;
 import com.eon.restaurant.eonsnack.server.entity.Address;
 import com.eon.restaurant.eonsnack.server.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<Address> findAll() {
-        return addressRepository.findAll();
+    public Page<Address> findAll(Pageable pageable) {
+        return addressRepository.findAll(Pageable.unpaged());
     }
 
     @Override

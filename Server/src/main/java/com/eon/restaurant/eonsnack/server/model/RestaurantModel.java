@@ -22,6 +22,7 @@ public class RestaurantModel extends RepresentationModel<RestaurantModel> {
     private String restName;
     private String hours;
     private String restNumber;
+    private List<Cuisines> cuisines;
     private Geolocation geolocation;
     private Address address;
 

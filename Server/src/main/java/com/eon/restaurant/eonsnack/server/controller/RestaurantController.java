@@ -3,22 +3,30 @@ package com.eon.restaurant.eonsnack.server.controller;
 import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.model.*;
 import com.eon.restaurant.eonsnack.server.model.assembler.*;
-import com.eon.restaurant.eonsnack.server.service.*;
+import com.eon.restaurant.eonsnack.server.service.AddressService;
+import com.eon.restaurant.eonsnack.server.service.MealService;
+import com.eon.restaurant.eonsnack.server.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RepositoryRestController
-@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(value = "/api/restaurants", produces = {MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE})
 public class RestaurantController {
 
     @Autowired
@@ -40,6 +48,9 @@ public class RestaurantController {
     private GeolocationModelAssembler geolocationModelAssembler;
 
     @Autowired
+    private PagedResourcesAssembler<Restaurant> pagedResourcesAssembler;
+
+    @Autowired
     private RestaurantService restaurantService;
 
     @Autowired
@@ -48,12 +59,16 @@ public class RestaurantController {
     @Autowired
     private MealService mealService;
 
+    @GetMapping("/list")
+    public ResponseEntity<PagedModel<RestaurantModel>> getAllRestaurants(@RequestParam(value = "page", defaultValue = "0", name = "page") int page,
+                                                                         @RequestParam(value = "size", defaultValue = "20") int size) {
 
-    @GetMapping("/restaurantss")
-    public ResponseEntity<CollectionModel<RestaurantModel>> getAllRestaurants() {
-        List<Restaurant> restaurants = restaurantService.findAll();
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+        Page<Restaurant> restaurants = restaurantService.findAllRestaurants(pageable);
 
-        return new ResponseEntity<>(restaurantModelAssembler.toCollectionModel(restaurants), HttpStatus.OK);
+        PagedModel<RestaurantModel> collModel = pagedResourcesAssembler.toModel(restaurants, restaurantModelAssembler);
+
+        return new ResponseEntity<>(collModel, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -65,21 +80,14 @@ public class RestaurantController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{id}/mealss")
-    public ResponseEntity<CollectionModel<MealModel>> getMealsForRestaurant(@PathVariable("id") long id) {
-        List<Meal> mealList = mealService.findAllByRestaurantId(id);
-
-        return new ResponseEntity<>(mealModelAssembler.toCollectionModel(mealList), HttpStatus.OK);
-    }
-
-   @GetMapping("/{id}/addresss")
+    @GetMapping("/{id}/address")
     public ResponseEntity<AddressModel> getAddressForRestaurant(@PathVariable("id") long id) {
         Address address = addressService.findByRestaurantId(id);
 
-        return new ResponseEntity<>(addressModelAssembler.toModel(address),HttpStatus.OK);
+        return new ResponseEntity<>(addressModelAssembler.toModel(address), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/tagss")
+    @GetMapping("/{id}/tags")
     public ResponseEntity<CollectionModel<TagModel>> getTagsForRestaurant(@PathVariable("id") long id) {
 
         Restaurant restaurant = restaurantService.getRestaurantById(id);
@@ -89,7 +97,7 @@ public class RestaurantController {
         return new ResponseEntity<>(tagModelAssembler.toCollectionModel(tagsList), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/cuisiness")
+    @GetMapping("/{id}/cuisines")
     public ResponseEntity<CollectionModel<CuisineModel>> getCuisinesForRestaurant(@PathVariable("id") long id) {
 
         Restaurant restaurant = restaurantService.getRestaurantById(id);
@@ -103,7 +111,7 @@ public class RestaurantController {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
         Geolocation geolocation = restaurant.getGeolocation();
 
-        return new ResponseEntity<>(geolocationModelAssembler.toModel(geolocation),HttpStatus.OK);
+        return new ResponseEntity<>(geolocationModelAssembler.toModel(geolocation), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/restaurants")
@@ -114,10 +122,11 @@ public class RestaurantController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @GetMapping("/meals/{mealId}/restaurant")
     public ResponseEntity<RestaurantModel> getRestaurantForMealId(@PathVariable("mealId") long mealId) {
         Restaurant restaurant = restaurantService.getRestaurantForMealId(mealId);
 
-        return new ResponseEntity<>(restaurantModelAssembler.toModel(restaurant),HttpStatus.OK);
+        return new ResponseEntity<>(restaurantModelAssembler.toModel(restaurant), HttpStatus.OK);
     }
 }

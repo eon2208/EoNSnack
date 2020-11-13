@@ -3,6 +3,8 @@ package com.eon.restaurant.eonsnack.server.service;
 import com.eon.restaurant.eonsnack.server.entity.Cuisines;
 import com.eon.restaurant.eonsnack.server.repository.CuisinesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,8 +34,8 @@ public class CuisinesServiceImpl implements CuisinesService {
     }
 
     @Override
-    public List<Cuisines> findAll() {
-        return cuisinesRepository.findAll();
+    public Page<Cuisines> findAll(Pageable pageable) {
+        return cuisinesRepository.findAll(Pageable.unpaged());
     }
 
 }

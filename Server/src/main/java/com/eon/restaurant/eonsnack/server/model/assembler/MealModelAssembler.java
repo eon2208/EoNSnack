@@ -1,12 +1,17 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
+import com.eon.restaurant.eonsnack.server.controller.MealsController;
 import com.eon.restaurant.eonsnack.server.controller.RestaurantController;
-import com.eon.restaurant.eonsnack.server.controller.WebController;
 import com.eon.restaurant.eonsnack.server.entity.Meal;
 import com.eon.restaurant.eonsnack.server.model.MealModel;
+
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -15,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class MealModelAssembler extends RepresentationModelAssemblerSupport<Meal, MealModel> {
 
         public MealModelAssembler() {
-            super(WebController.class, MealModel.class);
+            super(MealsController.class, MealModel.class);
         }
 
         @Override
@@ -24,11 +29,7 @@ public class MealModelAssembler extends RepresentationModelAssemblerSupport<Meal
             MealModel mealModel = instantiateModel(entity);
 
             mealModel.add(linkTo(
-                    methodOn(WebController.class)
-                            .getMealsById(entity.getId()))
-                    .withSelfRel());
-            mealModel.add(linkTo(
-                    methodOn(RestaurantController.class)
+                    methodOn(MealsController.class)
                             .getMealsForRestaurant(entity.getId()))
                     .withRel("restaurant"));
 
@@ -36,17 +37,17 @@ public class MealModelAssembler extends RepresentationModelAssemblerSupport<Meal
             mealModel.setDescription(entity.getDescription());
             mealModel.setName(entity.getName());
             mealModel.setPrice(entity.getPrice());
+            mealModel.setTag(entity.getTags());
             return mealModel;
         }
 
         @Override
         public CollectionModel<MealModel> toCollectionModel(Iterable<? extends Meal> entities) {
 
-            CollectionModel<MealModel> restaurantModels = super.toCollectionModel(entities);
-
-            restaurantModels.add(linkTo(methodOn(WebController.class).getAllMeals()).withSelfRel());
-
-            return restaurantModels;
+            return StreamSupport
+                    .stream(entities.spliterator(), false)
+                    .map(this::toModel)
+                    .collect(Collectors.collectingAndThen(Collectors.toList(), CollectionModel:: of));
         }
 
 }

@@ -1,6 +1,8 @@
 package com.eon.restaurant.eonsnack.server.service;
 
 import com.eon.restaurant.eonsnack.server.entity.Cuisines;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +15,6 @@ public interface CuisinesService {
 
     Optional<Cuisines> findById(int id);
 
-    List<Cuisines> findAll();
+    Page<Cuisines> findAll(Pageable pageable);
 
 }

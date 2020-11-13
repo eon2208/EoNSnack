@@ -1,9 +1,20 @@
 <div *ngFor="let tempMeals of meals" class="container">
 
-    <div class="container">
-        <mat-card-title>{{ tempMeals.name }} </mat-card-title>
-        <mat-card-header>{{tempMeals.description}}</mat-card-header>
-
-    </div>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-card-title>{{ tempMeals.name }} </mat-card-title>
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{tempMeals.price | currency}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            {{tempMeals.description}}
+        </mat-expansion-panel>
+    </mat-accordion>
 
 </div>
+
+<ngb-pagination [collectionSize]="theTotalElements" [(page)]="thePageNumber" [pageSize]="thePageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+(pageChange)="listMeals()"></ngb-pagination>

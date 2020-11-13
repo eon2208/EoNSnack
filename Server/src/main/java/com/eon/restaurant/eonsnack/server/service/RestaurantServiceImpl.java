@@ -1,14 +1,16 @@
 package com.eon.restaurant.eonsnack.server.service;
 
-import com.eon.restaurant.eonsnack.server.client.RestaurantMenuClient;
 import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.exception.RestaurantNotFoundException;
 import com.eon.restaurant.eonsnack.server.repository.MealRepository;
 import com.eon.restaurant.eonsnack.server.repository.RestaurantRepository;
-import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantMeals.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,9 +44,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> findAll() {
-        return restaurantRepository.findAll();
-    }
+    public Page<Restaurant> findAllRestaurants(Pageable pageable) {
+        Page<Restaurant> pageResult = restaurantRepository.findAll(pageable);
+
+        return pageResult;
+        }
 
     @Override
     public Restaurant getRestaurantById(long id) {

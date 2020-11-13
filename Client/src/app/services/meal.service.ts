@@ -35,7 +35,6 @@ export class MealService {
   }
 
   getMealForRestaurantByTags(theRestaurantId: number, theTagId: number): Observable<GetResponseMeals> {
-
     const url = `${this.baseUrl}/${theRestaurantId}/${theTagId}`;
 
     return this.httpClient.get<GetResponseMeals>(url)

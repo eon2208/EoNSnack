@@ -1,5 +1,6 @@
 package com.eon.restaurant.eonsnack.server.model;
 
+import com.eon.restaurant.eonsnack.server.entity.Meal;
 import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -20,7 +21,5 @@ public class TagModel extends RepresentationModel<TagModel> {
 
     private int id;
     private String name;
-
-    private List<RestaurantModel> restaurants;
-    private List<MealModel> meals;
+    private List<Restaurant> restaurants;
 }

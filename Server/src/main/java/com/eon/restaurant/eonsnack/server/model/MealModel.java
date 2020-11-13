@@ -21,9 +21,7 @@ public class MealModel extends RepresentationModel<MealModel> {
     private String name;
     private double price;
     private String description;
+    private Tags tag;
 
     private Restaurant restaurant;
-
-    //private Tags tags;
-
 }

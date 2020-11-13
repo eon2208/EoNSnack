@@ -18,7 +18,6 @@ public class TestController {
 
     private final JsonToEntityImpl jsonToEntity;
 
-
     @Autowired
     public TestController(RestaurantMenuClient restaurantMenuClient, JsonToEntityImpl jsonToEntity) {
         this.restaurantMenuClient = restaurantMenuClient;

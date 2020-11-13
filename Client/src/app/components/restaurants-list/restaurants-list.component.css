@@ -29,3 +29,7 @@ section {
     justify-content: center;
     width: 120px;
   }
+
+  .container {
+    margin-left: 4em;
+  }

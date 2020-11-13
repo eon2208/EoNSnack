@@ -4,6 +4,8 @@ import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.eon.restaurant.eonsnack.server.entity.Tags;
 import com.eon.restaurant.eonsnack.server.repository.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +28,8 @@ public class TagsServiceImpl implements TagsService {
     }
 
     @Override
-    public List<Tags> findAll() {
-        return tagsRepository.findAll();
+    public Page<Tags> findAllTags(Pageable pageable) {
+        return tagsRepository.findAll(pageable);
     }
 
     @Override

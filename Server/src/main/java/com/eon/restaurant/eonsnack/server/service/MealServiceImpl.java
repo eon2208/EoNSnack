@@ -3,8 +3,11 @@ package com.eon.restaurant.eonsnack.server.service;
 import com.eon.restaurant.eonsnack.server.entity.Meal;
 import com.eon.restaurant.eonsnack.server.repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.security.cert.PKIXParameters;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +18,8 @@ public class MealServiceImpl implements MealService{
     private MealRepository mealRepository;
 
     @Override
-    public List<Meal> findAll() {
-        return mealRepository.findAll();
+    public Page<Meal> findAll(Pageable pageable) {
+        return mealRepository.findAll(pageable);
     }
 
     @Override

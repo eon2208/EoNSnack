@@ -1,11 +1,16 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
 import com.eon.restaurant.eonsnack.server.controller.GeolocationController;
-import com.eon.restaurant.eonsnack.server.controller.WebController;
 import com.eon.restaurant.eonsnack.server.entity.Geolocation;
+import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.eon.restaurant.eonsnack.server.model.GeolocationModel;
+import com.eon.restaurant.eonsnack.server.model.RestaurantModel;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -14,7 +19,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class GeolocationModelAssembler extends RepresentationModelAssemblerSupport<Geolocation, GeolocationModel> {
 
     public GeolocationModelAssembler() {
-        super(WebController.class, GeolocationModel.class);
+        super(GeolocationController.class, GeolocationModel.class);
     }
 
     @Override
@@ -31,5 +36,14 @@ public class GeolocationModelAssembler extends RepresentationModelAssemblerSuppo
         geolocationModel.setLat(entity.getLat());
         geolocationModel.setLon(entity.getLon());
         return geolocationModel;
+    }
+
+    @Override
+    public CollectionModel<GeolocationModel> toCollectionModel(Iterable<? extends Geolocation> entities) {
+
+        return StreamSupport
+                .stream(entities.spliterator(), false)
+                .map(this::toModel)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), CollectionModel:: of));
     }
 }
