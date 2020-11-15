@@ -1,7 +1,10 @@
 package com.eon.restaurant.eonsnack.server.exceptions;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
+import java.util.logging.ErrorManager;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -11,101 +14,77 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class ApiResponseEntityExceptionHandler {
 
-    @ResponseBody
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ExceptionDescriptor> resourceNotFoundHandler(ResourceNotFoundException ex) {
-        ExceptionDescriptor descriptor = ExceptionDescriptor.builder()
-                .description(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .build();
-        return new ResponseEntity<>(descriptor, HttpStatus.NOT_FOUND);
+    public ErrorMessage resourceNotFoundHandler(ResourceNotFoundException ex, WebRequest request) {
+        return new ErrorMessage(
+                HttpStatus.NOT_FOUND.value(),
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+
     }
 
-    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidInputException.class)
-    public ResponseEntity<ExceptionDescriptor> invalidInputHandler(InvalidInputException ex) {
-        ExceptionDescriptor descriptor = ExceptionDescriptor.builder()
-                .description(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .build();
-        return new ResponseEntity<>(descriptor, HttpStatus.BAD_REQUEST);
+    public ErrorMessage invalidInputHandler(InvalidInputException ex, WebRequest request) {
+        return new ErrorMessage(
+                HttpStatus.BAD_REQUEST.value(),
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+
     }
-
-    @ExceptionHandler(ConversionFailedException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ExceptionDescriptor> ConnversionFailedHandler(RuntimeException ex) {
-        ExceptionDescriptor descriptor = ExceptionDescriptor.builder()
-                .description(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .build();
-
-        return new ResponseEntity<>(descriptor, HttpStatus.BAD_REQUEST);
-    }
-
-
 
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
     @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE)
-    public ResponseEntity<ExceptionDescriptor> HttpMediaTypeNotSupportedHandler(HttpMediaTypeNotAcceptableException ex) {
-
+    public ErrorMessage HttpMediaTypeNotSupportedHandler(HttpMediaTypeNotAcceptableException ex) {
         String acceptable = "Acceptable Media types: " + MediaType.toString(ex.getSupportedMediaTypes());
 
-        ExceptionDescriptor descriptor = ExceptionDescriptor.builder()
-                .description(String.format("%s", acceptable))
-                .timestamp(LocalDateTime.now())
-                .build();
-        return new ResponseEntity(descriptor, HttpStatus.NOT_ACCEPTABLE);
+            return new ErrorMessage(
+                    HttpStatus.NOT_ACCEPTABLE.value(),
+                    new Date(),
+                    ex.getMessage(),
+                    acceptable);
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     @ResponseStatus(code = HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-    public ResponseEntity<ExceptionDescriptor> HttpMediaTypeNotSupportedHandler(HttpMediaTypeNotSupportedException ex) {
+    public ErrorMessage HttpMediaTypeNotSupportedHandler(HttpMediaTypeNotSupportedException ex) {
         String unsupported = "Unsupported content type: " + ex.getContentType();
         String supported = "Supported content types: " + MediaType.toString(ex.getSupportedMediaTypes());
 
-        ExceptionDescriptor descriptor = ExceptionDescriptor.builder()
-                .description(String.format("%s.%s", unsupported, supported))
-                .timestamp(LocalDateTime.now())
-                .build();
-        return new ResponseEntity(descriptor, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        return new ErrorMessage(
+                HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(),
+                new Date(),
+                ex.getMessage(),
+                String.format("%s.%s", unsupported, supported));
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ExceptionDescriptor> HttpMessageNotReadableHandler(HttpMessageNotReadableException ex) {
-        ExceptionDescriptor descriptor = ExceptionDescriptor.builder()
-                .description(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .build();
-        return new ResponseEntity(descriptor, HttpStatus.BAD_REQUEST);
-    }
 
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<ExceptionDescriptor> internalServerErrorHandler(final Throwable e) {
+    public ErrorMessage internalServerErrorHandler(final Throwable e) {
 
         String message = "API internal server problem.";
-
-        ExceptionDescriptor descriptor = ExceptionDescriptor.builder()
-                .description(message)
-                .timestamp(LocalDateTime.now())
-                .build();
 
         UUID uuid = UUID.randomUUID();
         String errorRef = uuid.toString();
         log.error("errorRef=" + errorRef, message, e);
 
-        return new ResponseEntity(descriptor, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ErrorMessage(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                new Date(),
+                e.getMessage(),
+                message);
     }
 
 }
