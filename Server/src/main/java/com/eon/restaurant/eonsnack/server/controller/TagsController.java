@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.PagedModel;
@@ -46,6 +47,10 @@ public class TagsController {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
         Page<Tags> tags = tagsService.findAllTags(pageable);
 
+        if(tags.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
         PagedModel<TagModel> collModel = pagedResourcesAssembler.toModel(tags, tagModelAssembler);
 
         return new ResponseEntity<>(collModel, HttpStatus.OK);
@@ -57,6 +62,6 @@ public class TagsController {
         return tagsService.findById(id)
                 .map(tagModelAssembler::toModel)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new ResourceNotFoundException("not found tag with id: " + id));
     }
 }
