@@ -38,4 +38,7 @@ public class Address implements Serializable {
     @OneToOne(cascade = CascadeType.ALL ,mappedBy = "address")
     private Restaurant restaurant;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
+    private User user;
+
 }
