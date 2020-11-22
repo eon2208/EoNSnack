@@ -12,7 +12,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cuisines")
+@Table(name = "cuisines",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "name"),
+        })
 public class Cuisines implements Serializable {
 
     private static final long serialVersionUID = 1L;

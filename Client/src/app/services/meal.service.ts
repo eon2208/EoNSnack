@@ -24,7 +24,7 @@ export class MealService {
   getMealListPaginate(thePage: number, thePageSize: number): Observable<GetResponseMeals> {
     const url = `${this.baseUrl}?page=${thePage}&size=${thePageSize}`;
 
-    return this.httpClient.get<GetResponseMeals>(url)
+    return this.httpClient.get<GetResponseMeals>(url);
   }
 
   getMealsForRestaurant(theRestaurantId: number,thePage: number, thePageSize: number): Observable<Meal> {

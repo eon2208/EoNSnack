@@ -43,6 +43,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 import { BoardUserComponent } from './components/board-user/board-user.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 
 const routes: Routes = [
   { path: 'cuisine/:cuisineId', component: RestaurantsListComponent },
@@ -75,7 +77,9 @@ const routes: Routes = [
     HomeComponent,
     ProfileComponent,
     BoardAdminComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

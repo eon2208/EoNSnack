@@ -11,7 +11,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tags")
+@Table(name = "tags",
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name"),
+})
 public class Tags {
 
     @Id
