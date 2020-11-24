@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/test")
-public class TestController {
+public class GetFromRapidApi {
 
     private final RestaurantMenuClient restaurantMenuClient;
 
