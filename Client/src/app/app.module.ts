@@ -45,6 +45,7 @@ import { BoardAdminComponent } from './components/board-admin/board-admin.compon
 import { BoardUserComponent } from './components/board-user/board-user.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
+import { LoginPanelComponent } from './components/login-panel/login-panel.component';
 
 const routes: Routes = [
   { path: 'cuisine/:cuisineId', component: RestaurantsListComponent },
@@ -52,7 +53,6 @@ const routes: Routes = [
   { path: 'restaurant/:restaurantId', component: RestaurantComponent },
   { path: 'cuisines', component: RestaurantsListComponent },
   { path: 'meals', component: MealsListComponent },
-  { path: 'tags', component: MealsListComponent },
   { path: 'tags', component: MealsListComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -79,7 +79,8 @@ const routes: Routes = [
     BoardAdminComponent,
     BoardUserComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoginPanelComponent
   ],
   imports: [
     BrowserModule,
