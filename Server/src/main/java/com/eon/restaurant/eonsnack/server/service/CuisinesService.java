@@ -17,4 +17,5 @@ public interface CuisinesService {
 
     Page<Cuisines> findAll(Pageable pageable);
 
+    List<Cuisines> getCuisinesByIdList(List<Integer> cuisinesId);
 }

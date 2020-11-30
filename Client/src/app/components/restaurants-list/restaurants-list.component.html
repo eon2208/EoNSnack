@@ -1,9 +1,13 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
+
+  <mat-sidenav #sidenav mode="side">
     <app-restaurant-cuisines></app-restaurant-cuisines>
   </mat-sidenav>
 
   <mat-sidenav-content>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      filter
+  </button>
     <div *ngFor="let tempRest of restaurants" class="container">
       <mat-card>
         <mat-card-header>

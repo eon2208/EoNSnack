@@ -30,4 +30,8 @@ public class Cuisines implements Serializable {
     @ManyToMany(mappedBy = "cuisinesList")
     List<Restaurant> restaurant;
 
+    public Cuisines(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
 }

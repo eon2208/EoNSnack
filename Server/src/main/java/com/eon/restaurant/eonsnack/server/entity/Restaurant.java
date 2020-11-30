@@ -56,4 +56,10 @@ public class Restaurant implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "cuisine_id"))
     private List<Cuisines> cuisinesList;
 
+    public Restaurant(long id ,String restName,List<Cuisines> cuisines){
+        this.id = id;
+        this.restName = restName;
+        this.cuisinesList = cuisines;
+    }
+
 }

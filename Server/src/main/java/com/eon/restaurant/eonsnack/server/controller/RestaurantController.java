@@ -124,10 +124,13 @@ public class RestaurantController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/meals/{mealId}/restaurant")
-    public ResponseEntity<RestaurantModel> getRestaurantForMealId(@PathVariable("mealId") long mealId) {
-        Restaurant restaurant = restaurantService.getRestaurantForMealId(mealId);
+    @GetMapping("/filter/cuisines")
+    public ResponseEntity<PagedModel<RestaurantModel>> getRestaurantsByCuisinesFilter(@RequestParam List<Integer> cuisinesId) {
 
-        return new ResponseEntity<>(restaurantModelAssembler.toModel(restaurant), HttpStatus.OK);
+        Page<Restaurant> restaurants = restaurantService.findAllRestaurants(Pageable.unpaged());
+
+        PagedModel<RestaurantModel> collModel = pagedResourcesAssembler.toModel(restaurants, restaurantModelAssembler);
+
+        return new ResponseEntity<>(collModel, HttpStatus.OK);
     }
 }

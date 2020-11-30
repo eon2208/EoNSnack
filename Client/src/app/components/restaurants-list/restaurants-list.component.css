@@ -30,6 +30,10 @@ section {
     width: 120px;
   }
 
-  .container {
+  .restaurants {
     margin-left: 4em;
+  }
+
+  .container {
+    margin: 10px;
   }

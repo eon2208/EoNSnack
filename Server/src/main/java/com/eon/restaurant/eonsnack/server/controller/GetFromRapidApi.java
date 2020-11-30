@@ -19,7 +19,7 @@ public class GetFromRapidApi {
     private final JsonToEntityImpl jsonToEntity;
 
     @Autowired
-    public TestController(RestaurantMenuClient restaurantMenuClient, JsonToEntityImpl jsonToEntity) {
+    public GetFromRapidApi(RestaurantMenuClient restaurantMenuClient, JsonToEntityImpl jsonToEntity) {
         this.restaurantMenuClient = restaurantMenuClient;
         this.jsonToEntity = jsonToEntity;
     }

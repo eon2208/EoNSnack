@@ -2,6 +2,7 @@ package com.eon.restaurant.eonsnack.server.service;
 
 import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.exceptions.ResourceNotFoundException;
+import com.eon.restaurant.eonsnack.server.repository.CuisinesRepository;
 import com.eon.restaurant.eonsnack.server.repository.MealRepository;
 import com.eon.restaurant.eonsnack.server.repository.RestaurantRepository;
 import org.slf4j.Logger;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,16 +21,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    private final MealRepository mealRepository;
-
-
     Logger logger = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
-    @Autowired
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, MealRepository mealRepository) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
-        this.mealRepository = mealRepository;
     }
+
 
     @Override
     public void save(Restaurant restaurant) {
@@ -44,7 +43,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Page<Restaurant> pageResult = restaurantRepository.findAll(pageable);
 
         return pageResult;
-        }
+    }
 
     @Override
     public Restaurant getRestaurantById(long id) {
@@ -61,17 +60,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant getRestaurantForMealId(long id) {
-        Optional<Meal> result = mealRepository.findById(id);
-
-        Meal meal = null;
-        if(result.isPresent())
-            meal = result.get();
-
-        return meal.getRestaurant();
-    }
-
-    @Override
     public Optional<Restaurant> findRestaurantByAddressId(int id) {
         return restaurantRepository.findByAddress_Id(id);
     }
@@ -79,6 +67,19 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public boolean existsById(long restaurantId) {
         return restaurantRepository.existsById(restaurantId);
+    }
+
+    @Override
+    public Page<Restaurant> getFilteredListOfRestaurantsByCuisinesId(List<Integer> cuisinesId) {
+        Page<Restaurant> restaurants = restaurantRepository.findAll(Pageable.unpaged());
+
+        filterRestaurantsByCuisinesId(restaurants.getContent(), cuisinesId);
+
+        return restaurants;
+    }
+
+    private void filterRestaurantsByCuisinesId(List<Restaurant> restaurants, List<Integer> cuisinesId) {
+
     }
 }
 

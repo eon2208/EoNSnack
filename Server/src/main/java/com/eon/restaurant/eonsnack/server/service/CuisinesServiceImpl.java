@@ -38,4 +38,10 @@ public class CuisinesServiceImpl implements CuisinesService {
         return cuisinesRepository.findAll(Pageable.unpaged());
     }
 
+    @Override
+    public List<Cuisines> getCuisinesByIdList(List<Integer> cuisinesId) {
+
+        return null;
+    }
+
 }

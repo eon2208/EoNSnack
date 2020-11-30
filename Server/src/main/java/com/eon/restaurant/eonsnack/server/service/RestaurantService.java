@@ -17,9 +17,9 @@ public interface RestaurantService {
 
     Restaurant getRestaurantById(long id);
 
-    Restaurant getRestaurantForMealId(long id);
-
     Optional<Restaurant> findRestaurantByAddressId(int id);
 
     boolean existsById(long restaurantId);
+
+    Page<Restaurant> getFilteredListOfRestaurantsByCuisinesId(List<Integer> cuisinesId);
 }

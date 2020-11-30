@@ -45,7 +45,6 @@ import { BoardAdminComponent } from './components/board-admin/board-admin.compon
 import { BoardUserComponent } from './components/board-user/board-user.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
-import { LoginPanelComponent } from './components/login-panel/login-panel.component';
 
 const routes: Routes = [
   { path: 'cuisine/:cuisineId', component: RestaurantsListComponent },
@@ -63,7 +62,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/restaurants', pathMatch: 'full' },
   { path: '**', redirectTo: '/restaurants', pathMatch: 'full' }
 ];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,8 +77,7 @@ const routes: Routes = [
     BoardAdminComponent,
     BoardUserComponent,
     HeaderComponent,
-    FooterComponent,
-    LoginPanelComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
