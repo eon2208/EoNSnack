@@ -2,19 +2,16 @@ package com.eon.restaurant.eonsnack.server.service;
 
 import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.exceptions.ResourceNotFoundException;
-import com.eon.restaurant.eonsnack.server.repository.CuisinesRepository;
-import com.eon.restaurant.eonsnack.server.repository.MealRepository;
 import com.eon.restaurant.eonsnack.server.repository.RestaurantRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -27,6 +24,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         this.restaurantRepository = restaurantRepository;
     }
 
+    @Autowired
+    private CuisinesService cuisinesService;
 
     @Override
     public void save(Restaurant restaurant) {
@@ -71,15 +70,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Page<Restaurant> getFilteredListOfRestaurantsByCuisinesId(List<Integer> cuisinesId) {
-        Page<Restaurant> restaurants = restaurantRepository.findAll(Pageable.unpaged());
 
-        filterRestaurantsByCuisinesId(restaurants.getContent(), cuisinesId);
+        List<Restaurant> filteredRestaurantList = restaurantRepository.findByCuisinesList(cuisinesId);
 
-        return restaurants;
-    }
-
-    private void filterRestaurantsByCuisinesId(List<Restaurant> restaurants, List<Integer> cuisinesId) {
-
+        return new PageImpl<>(filteredRestaurantList);
     }
 }
 

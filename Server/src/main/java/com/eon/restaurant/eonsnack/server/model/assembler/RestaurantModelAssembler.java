@@ -1,5 +1,6 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
+import com.eon.restaurant.eonsnack.server.controller.CuisinesController;
 import com.eon.restaurant.eonsnack.server.controller.MealsController;
 import com.eon.restaurant.eonsnack.server.controller.RestaurantController;
 import com.eon.restaurant.eonsnack.server.entity.Restaurant;
@@ -42,13 +43,17 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
                 .withRel("meals"));
         restaurantModel.add(linkTo(
                 methodOn(RestaurantController.class)
+                        .getCuisinesForRestaurant(entity.getId()))
+                .withRel("cuisines"));
+        restaurantModel.add(linkTo(
+                methodOn(RestaurantController.class)
                         .getGeolocationForRestaurant(entity.getId()))
                 .withRel("geolocation"));
 
         return restaurantModel;
     }
 
-    public RestaurantModel buildRestaurantModel(Restaurant entity){
+    public RestaurantModel buildRestaurantModel(Restaurant entity) {
 
         return RestaurantModel.builder()
                 .id(entity.getId())
@@ -66,7 +71,7 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
         return StreamSupport
                 .stream(entities.spliterator(), false)
                 .map(this::toModel)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), CollectionModel:: of));
+                .collect(Collectors.collectingAndThen(Collectors.toList(), CollectionModel::of));
     }
 }
 

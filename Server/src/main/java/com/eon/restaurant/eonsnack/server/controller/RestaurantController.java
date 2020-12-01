@@ -4,6 +4,7 @@ import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.model.*;
 import com.eon.restaurant.eonsnack.server.model.assembler.*;
 import com.eon.restaurant.eonsnack.server.service.AddressService;
+import com.eon.restaurant.eonsnack.server.service.CuisinesService;
 import com.eon.restaurant.eonsnack.server.service.MealService;
 import com.eon.restaurant.eonsnack.server.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,9 @@ public class RestaurantController {
     @Autowired
     private MealService mealService;
 
+    @Autowired
+    private CuisinesService cuisinesService;
+
     @GetMapping("/list")
     public ResponseEntity<PagedModel<RestaurantModel>> getAllRestaurants(@RequestParam(value = "page", defaultValue = "0", name = "page") int page,
                                                                          @RequestParam(value = "size", defaultValue = "20") int size) {
@@ -107,6 +111,7 @@ public class RestaurantController {
         return new ResponseEntity<>(cuisinesModelAssembler.toCollectionModel(cuisinesList), HttpStatus.OK);
     }
 
+
     @GetMapping("/{id}/geolocations")
     public ResponseEntity<GeolocationModel> getGeolocationForRestaurant(@PathVariable("id") long id) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
@@ -127,7 +132,7 @@ public class RestaurantController {
     @GetMapping("/filter/cuisines")
     public ResponseEntity<PagedModel<RestaurantModel>> getRestaurantsByCuisinesFilter(@RequestParam List<Integer> cuisinesId) {
 
-        Page<Restaurant> restaurants = restaurantService.findAllRestaurants(Pageable.unpaged());
+        Page<Restaurant> restaurants = restaurantService.getFilteredListOfRestaurantsByCuisinesId(cuisinesId);
 
         PagedModel<RestaurantModel> collModel = pagedResourcesAssembler.toModel(restaurants, restaurantModelAssembler);
 

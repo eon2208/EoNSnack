@@ -14,6 +14,7 @@ import java.util.List;
 public interface MealRepository extends PagingAndSortingRepository<Meal, Long> {
 
     List<Meal> findAllByRestaurantIdAndTagsId(@RequestParam("/id") long restaurantId, @RequestParam("/id") int tagId);
+
     List<Meal> findAllByRestaurantId(long id);
 
 }

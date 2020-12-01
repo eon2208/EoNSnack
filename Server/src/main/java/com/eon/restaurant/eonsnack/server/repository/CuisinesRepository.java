@@ -17,5 +17,5 @@ public interface CuisinesRepository extends PagingAndSortingRepository<Cuisines,
 
     Boolean existsByName(String name);
 
-    List<Cuisines> findAllByRestaurant(Restaurant restaurant);
+    List<Cuisines> findByRestaurant(Restaurant restaurant);
 }

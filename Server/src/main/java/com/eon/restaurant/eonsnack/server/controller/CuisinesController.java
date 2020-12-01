@@ -24,7 +24,7 @@ import java.util.List;
 
 @RepositoryRestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping
+@RequestMapping("/api/cuisines")
 public class CuisinesController {
 
     private final CuisinesService cuisinesService;
@@ -38,19 +38,7 @@ public class CuisinesController {
         this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
-    @GetMapping("/cuisiness")
-    public ResponseEntity<CollectionModel<CuisineModel>> getAllCuisines(@RequestParam(value = "page", defaultValue = "0", name = "page") int page,
-                                                                        @RequestParam(value = "size", defaultValue = "20") int size) {
-
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
-        Page<Cuisines> mealPage = cuisinesService.findAll(pageable);
-
-        PagedModel<CuisineModel> collModel = pagedResourcesAssembler.toModel(mealPage, cuisinesModelAssembler);
-
-        return new ResponseEntity<>(collModel, HttpStatus.OK);
-    }
-
-    @GetMapping("/cuisiness/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CuisineModel> getCuisinesById(@PathVariable("id") int id) {
 
         return cuisinesService.findById(id)
@@ -59,3 +47,4 @@ public class CuisinesController {
                 .orElse(ResponseEntity.notFound().build());
     }
 }
+

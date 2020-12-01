@@ -59,12 +59,11 @@ class RestaurantServiceImplTest {
 
         List<Cuisines> cuisinesList4 = new ArrayList<>();
         cuisinesList4.add(new Cuisines(2, "test2"));
-        cuisinesList4.add(new Cuisines(3, "test3"));
 
         Restaurant restaurant1 = new Restaurant(1, "rest1", cuisinesList1);
-        Restaurant restaurant2 = new Restaurant(1, "rest2", cuisinesList2);
-        Restaurant restaurant3 = new Restaurant(1, "rest3", cuisinesList3);
-        Restaurant restaurant4 = new Restaurant(1, "rest4", cuisinesList4);
+        Restaurant restaurant2 = new Restaurant(2, "rest2", cuisinesList2);
+        Restaurant restaurant3 = new Restaurant(3, "rest3", cuisinesList3);
+        Restaurant restaurant4 = new Restaurant(4, "rest4", cuisinesList4);
 
         List<Restaurant> restaurantList = Arrays.asList(restaurant1,restaurant2,restaurant3,restaurant4);
         Page<Restaurant> restaurantPage = new PageImpl<>(restaurantList);

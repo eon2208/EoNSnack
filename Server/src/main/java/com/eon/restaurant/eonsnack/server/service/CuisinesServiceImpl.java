@@ -1,6 +1,7 @@
 package com.eon.restaurant.eonsnack.server.service;
 
 import com.eon.restaurant.eonsnack.server.entity.Cuisines;
+import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.eon.restaurant.eonsnack.server.repository.CuisinesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,9 @@ public class CuisinesServiceImpl implements CuisinesService {
 
     @Autowired
     private CuisinesRepository cuisinesRepository;
+
+    @Autowired
+    private RestaurantService restaurantService;
 
     @Override
     public Cuisines getByName(String name) {
@@ -39,9 +43,10 @@ public class CuisinesServiceImpl implements CuisinesService {
     }
 
     @Override
-    public List<Cuisines> getCuisinesByIdList(List<Integer> cuisinesId) {
+    public List<Cuisines> findAllByRestaurantId(long id) {
 
-        return null;
+        Restaurant restaurant = restaurantService.getRestaurantById(id);
+
+        return cuisinesRepository.findByRestaurant(restaurant);
     }
-
 }
