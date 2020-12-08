@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RepositoryRestController
-@RequestMapping("/api")
+@RequestMapping("/api/meals")
 public class MealsController {
 
     final MealService mealService;
@@ -37,17 +37,7 @@ public class MealsController {
         this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
-    @GetMapping("/meals")
-    public ResponseEntity<PagedModel<MealModel>> getAllMeals(@RequestParam(value = "page", defaultValue = "0", name = "page") int page,
-                                                             @RequestParam(value = "size", defaultValue = "20") int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
-        Page<Meal> mealPage = mealService.findAll(pageable);
-
-        PagedModel<MealModel> collModel = pagedResourcesAssembler.toModel(mealPage, mealModelAssembler);
-
-        return new ResponseEntity<>(collModel, HttpStatus.OK);
-    }
 
     @GetMapping("meals/{restId}/{tagId}")
     public ResponseEntity<CollectionModel<MealModel>> getMealsForRestaurantAndTag(
@@ -57,7 +47,6 @@ public class MealsController {
         return new ResponseEntity<>(mealModelAssembler.toCollectionModel(mealList), HttpStatus.OK);
     }
 
-
     @GetMapping("/mealss/{id}")
     public ResponseEntity<MealModel> getMealsById(@PathVariable("id") long id) {
 
@@ -65,13 +54,6 @@ public class MealsController {
                 .map(mealModelAssembler::toModel)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/{id}/meals")
-    public ResponseEntity<CollectionModel<MealModel>> getMealsForRestaurant(@PathVariable("id") long id) {
-        List<Meal> mealList = mealService.findAllByRestaurantId(id);
-
-        return new ResponseEntity<>(mealModelAssembler.toCollectionModel(mealList), HttpStatus.OK);
     }
 
 }

@@ -38,7 +38,7 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
                         .getTagsForRestaurant(entity.getId()))
                 .withRel("tags"));
         restaurantModel.add(linkTo(
-                methodOn(MealsController.class)
+                methodOn(RestaurantController.class)
                         .getMealsForRestaurant(entity.getId()))
                 .withRel("meals"));
         restaurantModel.add(linkTo(

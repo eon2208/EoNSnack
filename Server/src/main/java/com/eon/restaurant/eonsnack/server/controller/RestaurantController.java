@@ -138,4 +138,11 @@ public class RestaurantController {
 
         return new ResponseEntity<>(collModel, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}/mealss")
+    public ResponseEntity<CollectionModel<MealModel>> getMealsForRestaurant(@PathVariable("id") long id) {
+        List<Meal> mealList = mealService.findAllByRestaurantId(id);
+
+        return new ResponseEntity<>(mealModelAssembler.toCollectionModel(mealList), HttpStatus.OK);
+    }
 }

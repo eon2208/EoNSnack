@@ -30,6 +30,7 @@ public class CuisinesController {
     private final CuisinesService cuisinesService;
 
     private final CuisinesModelAssembler cuisinesModelAssembler;
+
     private final PagedResourcesAssembler<Cuisines> pagedResourcesAssembler;
 
     public CuisinesController(CuisinesService cuisinesService, CuisinesModelAssembler cuisinesModelAssembler, PagedResourcesAssembler<Cuisines> pagedResourcesAssembler) {

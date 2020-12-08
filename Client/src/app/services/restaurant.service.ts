@@ -11,32 +11,44 @@ export class RestaurantService {
 
   private baseUrl = 'http://localhost:8080/api/restaurants';
   private cuisinesUrl = 'http://localhost:8080/api/cuisines';
+  private filterCuisinesUrl = 'http://localhost:8080/api/restaurants/filter/cuisines?cuisinesId='
 
   constructor(private httpClient: HttpClient) { }
 
   private getRestaurants(searchUrl: string){
     
-    return this.httpClient.get<GetResponseRestaurant>(searchUrl).pipe(
+    return this.httpClient.get<GetResponseRestaurants>(searchUrl).pipe(
       map(response => response._embedded.restaurants)
     )
   }
 
-  getRestaurantsListPaginate(thePage: number, thePageSize: number): Observable<GetResponseRestaurant> {
+  getRestaurantsListPaginate(thePage: number, thePageSize: number): Observable<GetResponseRestaurants> {
     const url = `${this.baseUrl}?page=${thePage}&size=${thePageSize}`;
 
-    return this.httpClient.get<GetResponseRestaurant>(url)
+    return this.httpClient.get<GetResponseRestaurants>(url)
   }
 
-  getRestaurantsListByCuisines(theCuisineId: number): Observable<GetResponseRestaurant> {
+  getRestaurantsListByCuisines(theCuisineId: number): Observable<GetResponseRestaurants> {
 
     const url = `${this.cuisinesUrl}/${theCuisineId}/restaurant`;
 
-    return this.httpClient.get<GetResponseRestaurant>(url);
+    return this.httpClient.get<GetResponseRestaurants>(url);
+  }
+
+  getFilteredRestaurantsList(filterId: number[]): Observable<GetResponseRestaurants> {
+    
+    let url = this.filterCuisinesUrl;
+
+    for (let cuisineId of filterId){
+      url += cuisineId.toString + ',';
+    }
+
+    return this.httpClient.get<GetResponseRestaurants>(url);
   }
 
 }
 
-interface GetResponseRestaurant {
+interface GetResponseRestaurants {
   _embedded: {
     restaurants: Restaurant[];
   },

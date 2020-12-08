@@ -16,7 +16,6 @@ public class JsonToEntityImpl implements JsonToEntity {
     private Restaurant restaurantHelper;
     List<Meal> mealList;
 
-
     Logger logger = LoggerFactory.getLogger(JsonToEntityImpl.class);
 
     private final RestaurantService restaurantService;

@@ -51,6 +51,7 @@ const routes: Routes = [
   { path: 'restaurants', component: RestaurantsListComponent },
   { path: 'restaurant/:restaurantId', component: RestaurantComponent },
   { path: 'cuisines', component: RestaurantsListComponent },
+  { path: 'filter', component: RestaurantsListComponent },
   { path: 'meals', component: MealsListComponent },
   { path: 'tags', component: MealsListComponent },
   { path: 'home', component: HomeComponent },

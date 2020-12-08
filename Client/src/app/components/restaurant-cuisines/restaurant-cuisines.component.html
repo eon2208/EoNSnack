@@ -1,13 +1,22 @@
-<div class="menu-sidebar-content js-scrollbar1">  
+<div class="menu-sidebar-content js-scrollbar1">
 
-    <ul class="list-unstyled navbar-list">
+  <ul class="list-unstyled navbar-list">
+    <formly-form [form]="form" [fields]="cuisines" [options]="options" [model]="model"></formly-form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <li *ngFor="let tempRestaurantCuisines of cuisines">
-        <a routerLink="/cuisine/{{tempRestaurantCuisines.id}}" routerLinkActive="active-link">
+        <!-- <mat-checkbox (change)="changeFilterSelection(tempRestaurantCuisines.id)"
+         routerLink="/filter/{{tempRestaurantCuisines.id}}"
+         routerLinkActive="active-link">
            {{tempRestaurantCuisines.name}}
-        </a>
+      </mat-checkbox> -->
       </li>
-    </ul>
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+    </form>
+  </ul>
+  <pre>
+        {{model | json}}
+      </pre>
 
-    <ngb-pagination [collectionSize]="theTotalElements" [(page)]="thePage" [pageSize]="thePageSize" [maxSize]="2" [rotate]="true"
-     (pageChange)="listRestaurantCuisines()" size = "sm"></ngb-pagination>
+  <ngb-pagination [collectionSize]="theTotalElements" [(page)]="thePage" [pageSize]="thePageSize" [maxSize]="2"
+    [rotate]="true" (pageChange)="listRestaurantCuisines()" size="sm"></ngb-pagination>
 </div>

@@ -15,6 +15,7 @@ export class RestaurantsListComponent implements OnInit {
   thePageNumber:number = 1;
   thePageSize: number = 20;
   theTotalElements: number = 0;
+  filterList: number[] = [];
 
   currentCuisineId : number = 1;
   previousCuisineId: number = 1;
@@ -38,6 +39,7 @@ export class RestaurantsListComponent implements OnInit {
   private handleListRestaurants() {
 
     const hasCuisineId: boolean = this.route.snapshot.paramMap.has('cuisineId');
+    const hasFilter: boolean = this.route.snapshot.paramMap.has('filter');
 
     if(hasCuisineId){
       this.currentCuisineId = +this.route.snapshot.paramMap.get('cuisineId');
@@ -45,7 +47,11 @@ export class RestaurantsListComponent implements OnInit {
         this.processPickResult()
       );
     }
-
+    else if(hasFilter){
+      this.restaurantService.getFilteredRestaurantsList(this.filterList).subscribe(
+        this.processResult()
+      );
+    }
     else {
         this.restaurantService.getRestaurantsListPaginate(this.thePageNumber - 1, this.thePageSize).subscribe(
           this.processResult()

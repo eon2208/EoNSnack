@@ -29,7 +29,7 @@ public class MealModelAssembler extends RepresentationModelAssemblerSupport<Meal
             MealModel mealModel = instantiateModel(entity);
 
             mealModel.add(linkTo(
-                    methodOn(MealsController.class)
+                    methodOn(RestaurantController.class)
                             .getMealsForRestaurant(entity.getId()))
                     .withRel("restaurant"));
 
