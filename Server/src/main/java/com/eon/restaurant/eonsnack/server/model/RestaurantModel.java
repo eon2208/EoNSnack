@@ -8,6 +8,7 @@ import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -22,11 +23,10 @@ public class RestaurantModel extends RepresentationModel<RestaurantModel> {
     private String restName;
     private String hours;
     private String restNumber;
-    private List<Cuisines> cuisines;
+    private Set<Cuisines> cuisines;
     private Geolocation geolocation;
     private Address address;
 
-    //private List<TagModel> tagsList;
     private List<MealModel> meals;
     private List<CuisineModel> cuisinesList;
 }

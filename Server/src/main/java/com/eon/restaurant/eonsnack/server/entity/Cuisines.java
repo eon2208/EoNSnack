@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,7 +29,11 @@ public class Cuisines implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "cuisinesList")
-    List<Restaurant> restaurant;
+    Set<Restaurant> restaurant;
+
+    @ManyToMany(mappedBy = "cuisines")
+    Set<User> users;
+
 
     public Cuisines(int id, String name){
         this.id = id;

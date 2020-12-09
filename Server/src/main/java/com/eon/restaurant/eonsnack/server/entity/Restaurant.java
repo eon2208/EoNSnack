@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -42,21 +43,24 @@ public class Restaurant implements Serializable {
     @JoinTable(name = "restaurant_tags",
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tags> tagsList;
+    private Set<Tags> tagsList;
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "restaurant")
-    private List<Meal> meals;
+    private Set<Meal> meals;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "restaurant_cuisines",
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "cuisine_id"))
-    private List<Cuisines> cuisinesList;
+    private Set<Cuisines> cuisinesList;
 
-    public Restaurant(long id ,String restName,List<Cuisines> cuisines){
+    @ManyToMany(mappedBy = "restaurants")
+    private Set<User> users;
+
+    public Restaurant(long id ,String restName, Set<Cuisines> cuisines){
         this.id = id;
         this.restName = restName;
         this.cuisinesList = cuisines;

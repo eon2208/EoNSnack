@@ -4,7 +4,6 @@ import com.eon.restaurant.eonsnack.server.service.JsonToEntityImpl;
 import com.eon.restaurant.eonsnack.server.client.RestaurantMenuClient;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantList.RestaurantsList;
 import com.eon.restaurant.eonsnack.server.model.rapidApi.RestaurantMeals.RestaurantJsonItem;
-import com.eon.restaurant.eonsnack.server.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

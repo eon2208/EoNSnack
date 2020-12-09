@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -25,11 +26,14 @@ public class Tags {
     private String name;
 
     @ManyToMany(mappedBy = "tagsList")
-    List<Restaurant> restaurants;
+    Set<Restaurant> restaurants;
+
+    @ManyToMany(mappedBy = "tags")
+    Set<User> users;
 
     @OneToMany(mappedBy = "tags",
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Meal> meals;
+    private Set<Meal> meals;
 
 }

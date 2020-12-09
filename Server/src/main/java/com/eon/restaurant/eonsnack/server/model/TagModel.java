@@ -9,6 +9,7 @@ import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,5 +22,5 @@ public class TagModel extends RepresentationModel<TagModel> {
 
     private int id;
     private String name;
-    private List<Restaurant> restaurants;
+    private Set<Restaurant> restaurants;
 }

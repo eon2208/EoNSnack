@@ -72,7 +72,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public Page<Restaurant> getFilteredListOfRestaurantsByCuisinesId(List<Integer> cuisinesId) {
 
         List<Restaurant> filteredRestaurantList = restaurantRepository.findByCuisinesList(cuisinesId);
-
+;
         return new PageImpl<>(filteredRestaurantList);
     }
 }

@@ -7,14 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class JsonToEntityImpl implements JsonToEntity {
 
     private Restaurant restaurantHelper;
-    List<Meal> mealList;
+    Set<Meal> mealList;
 
     Logger logger = LoggerFactory.getLogger(JsonToEntityImpl.class);
 
@@ -69,7 +70,7 @@ public class JsonToEntityImpl implements JsonToEntity {
     }
 
     private void createMealList(List<JsonMenu> jsonMenus) {
-        mealList = new ArrayList<>();
+        mealList = new HashSet<>();
         for (JsonMenu jsonMenu : jsonMenus) {
             for (MenuSection menuSection : jsonMenu.getMenuSections()) {
                 Tags tags = gatTag(menuSection.getSectionName());
@@ -122,7 +123,7 @@ public class JsonToEntityImpl implements JsonToEntity {
 
     private void saveCuisines(List<String> jsonCuisines) {
         if (!jsonCuisines.isEmpty()) {
-            List<Cuisines> cuisinesList = new ArrayList<>();
+            Set<Cuisines> cuisinesList = new HashSet<>();
 
             for (String cuisineName : jsonCuisines) {
                 addCuisineToList(cuisinesList, cuisineName);
@@ -133,7 +134,7 @@ public class JsonToEntityImpl implements JsonToEntity {
         }
     }
 
-    private void addCuisineToList(List<Cuisines> cuisinesList, String cuisineName) {
+    private void addCuisineToList(Set<Cuisines> cuisinesList, String cuisineName) {
         if (cuisinesService.existsByName(cuisineName)) {
             Cuisines currentlyExisting = cuisinesService.getByName(cuisineName);
             cuisinesList.add(currentlyExisting);
@@ -146,18 +147,18 @@ public class JsonToEntityImpl implements JsonToEntity {
 
     private void saveTags(List<String> jsonTags) {
         if (!jsonTags.isEmpty()) {
-            List<Tags> tagsList = new ArrayList<>();
+            Set<Tags> tagsSet = new HashSet<>();
 
             for (String tagName : jsonTags) {
-                addTagToList(tagsList, tagName);
+                addTagToList(tagsSet, tagName);
             }
 
-            this.restaurantHelper.setTagsList(tagsList);
+            this.restaurantHelper.setTagsList(tagsSet);
             logger.info("tags saved");
         }
     }
 
-    private void addTagToList(List<Tags> tagsList, String tagName) {
+    private void addTagToList(Set<Tags> tagsList, String tagName) {
         Tags tag;
         String tagToLower = tagName.toLowerCase();
         if (tagsService.existsByName(tagToLower)) {

@@ -25,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RepositoryRestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -96,23 +97,23 @@ public class RestaurantController {
     public ResponseEntity<CollectionModel<TagModel>> getTagsForRestaurant(@PathVariable("id") long id) {
 
         Restaurant restaurant = restaurantService.getRestaurantById(id);
-        List<Tags> tagsList = restaurant.getTagsList();
+        Set<Tags> tagsList = restaurant.getTagsList();
 
 
         return new ResponseEntity<>(tagModelAssembler.toCollectionModel(tagsList), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/cuisines")
+    @GetMapping("/{id}/cuisine")
     public ResponseEntity<CollectionModel<CuisineModel>> getCuisinesForRestaurant(@PathVariable("id") long id) {
 
         Restaurant restaurant = restaurantService.getRestaurantById(id);
-        List<Cuisines> cuisinesList = restaurant.getCuisinesList();
+        Set<Cuisines> cuisinesList = restaurant.getCuisinesList();
 
         return new ResponseEntity<>(cuisinesModelAssembler.toCollectionModel(cuisinesList), HttpStatus.OK);
     }
 
 
-    @GetMapping("/{id}/geolocations")
+    @GetMapping("/{id}/geolocation")
     public ResponseEntity<GeolocationModel> getGeolocationForRestaurant(@PathVariable("id") long id) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
         Geolocation geolocation = restaurant.getGeolocation();
@@ -120,7 +121,7 @@ public class RestaurantController {
         return new ResponseEntity<>(geolocationModelAssembler.toModel(geolocation), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/restaurants")
+    @GetMapping("/{id}/restaurant")
     public ResponseEntity<RestaurantModel> getRestaurantByAddressId(@PathVariable("id") int id) {
 
         return restaurantService.findRestaurantByAddressId(id)

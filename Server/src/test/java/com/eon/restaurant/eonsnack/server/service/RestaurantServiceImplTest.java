@@ -15,9 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.Mockito.doReturn;
 
@@ -35,29 +33,30 @@ class RestaurantServiceImplTest {
     @Test
     @DisplayName("filter restaurants by cuisines id list")
     void filterAllRestaurantsByCuisineId() {
+
         List<Integer> cuisinesId = new ArrayList<>();
         cuisinesId.add(1);
         cuisinesId.add(3);
         cuisinesId.add(6);
         cuisinesId.add(5);
 
-        List<Cuisines> cuisinesList1 = new ArrayList<>();
+        Set<Cuisines> cuisinesList1 = new HashSet<>();
         cuisinesList1.add(new Cuisines(1, "test1"));
         cuisinesList1.add(new Cuisines(2, "test2"));
         cuisinesList1.add(new Cuisines(6, "test6"));
 
-        List<Cuisines> cuisinesList2 = new ArrayList<>();
+        Set<Cuisines> cuisinesList2 = new HashSet<>();
         cuisinesList2.add(new Cuisines(3, "test3"));
         cuisinesList2.add(new Cuisines(4, "test4"));
         cuisinesList2.add(new Cuisines(6, "test6"));
 
-        List<Cuisines> cuisinesList3 = new ArrayList<>();
+        Set<Cuisines> cuisinesList3 = new HashSet<>();
         cuisinesList3.add(new Cuisines(1, "test1"));
         cuisinesList3.add(new Cuisines(2, "test2"));
         cuisinesList3.add(new Cuisines(3, "test3"));
         cuisinesList3.add(new Cuisines(4, "test4"));
 
-        List<Cuisines> cuisinesList4 = new ArrayList<>();
+        Set<Cuisines> cuisinesList4 = new HashSet<>();
         cuisinesList4.add(new Cuisines(2, "test2"));
 
         Restaurant restaurant1 = new Restaurant(1, "rest1", cuisinesList1);
