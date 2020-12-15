@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TagsServiceImpl implements TagsService {
@@ -35,6 +36,11 @@ public class TagsServiceImpl implements TagsService {
     @Override
     public Optional<Tags> findById(int id) {
         return tagsRepository.findById(id);
+    }
+
+    @Override
+    public List<Tags> findAllByIdList(Set<Integer> tagsId) {
+        return tagsRepository.findAllById(tagsId);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface TagsService {
     
@@ -17,6 +18,8 @@ public interface TagsService {
     Page<Tags> findAllTags(Pageable pageable);
 
     Optional<Tags> findById(int id);
+
+    List<Tags> findAllByIdList(Set<Integer> tagsId);
 
     void save(Tags tag);
 }

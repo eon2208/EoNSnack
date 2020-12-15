@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CuisinesServiceImpl implements CuisinesService {
@@ -35,6 +36,12 @@ public class CuisinesServiceImpl implements CuisinesService {
     @Override
     public Optional<Cuisines> findById(int id) {
         return cuisinesRepository.findById(id);
+    }
+
+    @Override
+    public List<Cuisines> findAllByIdList(Set<Integer> cuisinesId) {
+
+        return cuisinesRepository.findAllById(cuisinesId);
     }
 
     @Override

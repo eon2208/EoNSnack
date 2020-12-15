@@ -21,5 +21,5 @@ public interface RestaurantService {
 
     boolean existsById(long restaurantId);
 
-    Page<Restaurant> getFilteredListOfRestaurantsByCuisinesId(List<Integer> cuisinesId);
+    Page<Restaurant> getFilteredListOfRestaurants(List<Integer> cuisinesId, List<Integer> tagsId);
 }

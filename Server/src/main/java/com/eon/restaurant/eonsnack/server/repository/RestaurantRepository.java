@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @CrossOrigin("http://localhost:4200")
 public interface RestaurantRepository extends PagingAndSortingRepository<Restaurant, Long> {
@@ -21,7 +22,13 @@ public interface RestaurantRepository extends PagingAndSortingRepository<Restaur
     @Query("select distinct restaurant \n" +
             "from Restaurant restaurant  \n" +
             "join restaurant.cuisinesList cuisinesList \n" +
-            "where cuisinesList.id in :cuisinesId")
-    List<Restaurant> findByCuisinesList(List<Integer> cuisinesId);
+            "where cuisinesList.id in :cuisinesId \n")
+    List<Restaurant> findByCuisinesId(List<Integer> cuisinesId);
+
+    @Query("select distinct restaurant \n" +
+            "from Restaurant restaurant  \n" +
+            "join restaurant.tagsList tagsList \n" +
+            "where tagsList.id in :tagsId \n")
+    List<Restaurant> findByTagsId(List<Integer> tagsId);
 
 }

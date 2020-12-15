@@ -29,7 +29,7 @@ public class Tags {
     Set<Restaurant> restaurants;
 
     @ManyToMany(mappedBy = "tags")
-    Set<User> users;
+    Set<Preferences> preferences;
 
     @OneToMany(mappedBy = "tags",
             cascade = {CascadeType.DETACH, CascadeType.MERGE,

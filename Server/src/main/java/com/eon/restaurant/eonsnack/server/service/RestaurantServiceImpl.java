@@ -69,11 +69,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Page<Restaurant> getFilteredListOfRestaurantsByCuisinesId(List<Integer> cuisinesId) {
+    public Page<Restaurant> getFilteredListOfRestaurants(List<Integer> cuisinesId, List<Integer> tagsId) {
 
-        List<Restaurant> filteredRestaurantList = restaurantRepository.findByCuisinesList(cuisinesId);
-;
-        return new PageImpl<>(filteredRestaurantList);
+        Set<Restaurant> filteredRestaurantList = new HashSet<>();
+        filteredRestaurantList.addAll(restaurantRepository.findByCuisinesId(cuisinesId));
+        filteredRestaurantList.addAll(restaurantRepository.findByTagsId(tagsId));
+
+        return new PageImpl<>(new ArrayList<>(filteredRestaurantList));
     }
+
 }
 

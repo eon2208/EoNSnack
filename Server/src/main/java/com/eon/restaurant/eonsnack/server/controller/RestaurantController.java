@@ -3,6 +3,10 @@ package com.eon.restaurant.eonsnack.server.controller;
 import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.model.*;
 import com.eon.restaurant.eonsnack.server.model.assembler.*;
+import com.eon.restaurant.eonsnack.server.payload.request.LoginRequest;
+import com.eon.restaurant.eonsnack.server.payload.request.PreferencesRequest;
+import com.eon.restaurant.eonsnack.server.payload.response.JwtResponse;
+import com.eon.restaurant.eonsnack.server.security.services.UserDetailsImpl;
 import com.eon.restaurant.eonsnack.server.service.AddressService;
 import com.eon.restaurant.eonsnack.server.service.CuisinesService;
 import com.eon.restaurant.eonsnack.server.service.MealService;
@@ -22,10 +26,15 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RepositoryRestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -64,6 +73,7 @@ public class RestaurantController {
 
     @Autowired
     private CuisinesService cuisinesService;
+
 
     @GetMapping("/list")
     public ResponseEntity<PagedModel<RestaurantModel>> getAllRestaurants(@RequestParam(value = "page", defaultValue = "0", name = "page") int page,
@@ -130,10 +140,10 @@ public class RestaurantController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/filter/cuisines")
-    public ResponseEntity<PagedModel<RestaurantModel>> getRestaurantsByCuisinesFilter(@RequestParam List<Integer> cuisinesId) {
+    @GetMapping("/filter")
+    public ResponseEntity<PagedModel<RestaurantModel>> getRestaurantsByCuisinesFilter(@RequestParam(required = false) List<Integer> cuisinesId, @RequestParam(required = false) List<Integer>tagsId) {
 
-        Page<Restaurant> restaurants = restaurantService.getFilteredListOfRestaurantsByCuisinesId(cuisinesId);
+        Page<Restaurant> restaurants = restaurantService.getFilteredListOfRestaurants(cuisinesId,tagsId);
 
         PagedModel<RestaurantModel> collModel = pagedResourcesAssembler.toModel(restaurants, restaurantModelAssembler);
 
@@ -146,4 +156,6 @@ public class RestaurantController {
 
         return new ResponseEntity<>(mealModelAssembler.toCollectionModel(mealList), HttpStatus.OK);
     }
+
+
 }
