@@ -19,7 +19,7 @@ public interface TagsService {
 
     Optional<Tags> findById(int id);
 
-    List<Tags> findAllByIdList(Set<Integer> tagsId);
+    List<Tags> findAllByIdList(Set<Integer> tagsSet);
 
     void save(Tags tag);
 }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class TagsServiceImpl implements TagsService {
 
     @Override
     public List<Tags> findAllByIdList(Set<Integer> tagsId) {
-        return tagsRepository.findAllById(tagsId);
+        return tagsRepository.findAllByIdList(tagsId);
     }
 
     @Override

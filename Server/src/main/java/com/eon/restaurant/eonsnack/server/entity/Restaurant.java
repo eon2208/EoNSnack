@@ -58,7 +58,7 @@ public class Restaurant implements Serializable {
     private Set<Cuisines> cuisinesList;
 
     @ManyToMany(mappedBy = "restaurants")
-    private Set<User> users;
+    private Set<Preferences> preferences;
 
     public Restaurant(long id ,String restName, Set<Cuisines> cuisines){
         this.id = id;

@@ -4,6 +4,7 @@ import com.eon.restaurant.eonsnack.server.entity.Meal;
 import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @CrossOrigin("http://localhost:4200")
+@Repository
 public interface MealRepository extends PagingAndSortingRepository<Meal, Long> {
 
     List<Meal> findAllByRestaurantIdAndTagsId(@RequestParam("/id") long restaurantId, @RequestParam("/id") int tagId);

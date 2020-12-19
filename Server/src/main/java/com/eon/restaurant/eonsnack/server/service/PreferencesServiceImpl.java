@@ -4,7 +4,6 @@ import com.eon.restaurant.eonsnack.server.entity.*;
 import com.eon.restaurant.eonsnack.server.payload.request.PreferencesRequest;
 import com.eon.restaurant.eonsnack.server.repository.PreferencesRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -34,25 +33,32 @@ public class PreferencesServiceImpl implements PreferencesService {
         Set<Tags> tagsSet = new HashSet<>(tagsService.findAllByIdList(preferencesRequest.getTagsId()));
         Set<Cuisines> cuisinesSet = new HashSet<>(cuisinesService.findAllByIdList(preferencesRequest.getTagsId()));
 
-        Preferences preferences = null;
+        Preferences preferences = getPreferencesForCurrentUser(user);
 
-        else(preferencesRepository.existsByUser(user)){
-            Preferences userPreferences = user.getPreferences();
+        preferences.setCuisines(cuisinesSet);
+        preferences.setTags(tagsSet);
 
-            userPreferences.setCuisines(cuisinesSet);
-            userPreferences.setTags();
+        preferencesRepository.save(preferences);
 
+    }
 
-        }
-        if{
+    private Preferences getPreferencesForCurrentUser(User user) {
+        Preferences preferences;
+        if (preferencesRepository.existsByUser(user)) {
+            preferences = user.getPreferences();
+        } else {
             preferences = new Preferences();
         }
-
-
-        preferencesRepository.save(preferences)
+        return preferences;
     }
 
     @Override
     public void saveRestaurant(Long id, User user) {
+
+        Restaurant restaurant = restaurantService.getRestaurantById(id);
+
+        Preferences preferences = user.getPreferences();
+        Set<Restaurant> restaurantsSet = preferences.getRestaurants();
+        restaurantsSet.add(restaurant);
     }
 }

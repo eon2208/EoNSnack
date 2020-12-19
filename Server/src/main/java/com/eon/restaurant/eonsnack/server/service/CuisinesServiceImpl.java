@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -41,7 +42,7 @@ public class CuisinesServiceImpl implements CuisinesService {
     @Override
     public List<Cuisines> findAllByIdList(Set<Integer> cuisinesId) {
 
-        return cuisinesRepository.findAllById(cuisinesId);
+        return cuisinesRepository.findAllByIdList(cuisinesId);
     }
 
     @Override

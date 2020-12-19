@@ -24,20 +24,20 @@ public class Preferences {
     private User user;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_restaurants",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "preference_restaurants",
+            joinColumns = @JoinColumn(name = "preference_id"),
             inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     private Set<Restaurant> restaurants = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_tags",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "preference_tags",
+            joinColumns = @JoinColumn(name = "preference_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tags> tags = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_cuisines",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "preferences_cuisines",
+            joinColumns = @JoinColumn(name = "preference_id"),
             inverseJoinColumns = @JoinColumn(name = "cuisine_id"))
     private Set<Cuisines> cuisines = new HashSet<>();
 }
