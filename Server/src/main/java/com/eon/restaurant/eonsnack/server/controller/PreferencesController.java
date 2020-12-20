@@ -26,7 +26,7 @@ public class PreferencesController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/preferences")
+    @PostMapping("/add")
     public void savePreferences(@RequestBody PreferencesRequest preferencesRequest, Authentication authentication) {
 
         User user = userService.findByUsername(authentication.getName());
@@ -34,4 +34,12 @@ public class PreferencesController {
         preferencesService.saveUserPreferences(preferencesRequest, user);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/addRestaurant")
+    public void addRestaurantWithId(@RequestParam("restaurantId") long restaurantId, Authentication authentication) {
+
+        User user = userService.findByUsername(authentication.getName());
+
+        preferencesService.saveRestaurant(restaurantId, user);
+    }
 }

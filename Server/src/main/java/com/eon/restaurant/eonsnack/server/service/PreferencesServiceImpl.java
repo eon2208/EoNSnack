@@ -58,8 +58,9 @@ public class PreferencesServiceImpl implements PreferencesService {
 
         Restaurant restaurant = restaurantService.getRestaurantById(id);
 
-        Preferences preferences = user.getPreferences();
-        Set<Restaurant> restaurantsSet = preferences.getRestaurants();
-        restaurantsSet.add(restaurant);
+        Preferences preferences = getPreferencesForCurrentUser(user);
+        preferences.getRestaurants().add(restaurant);
+
+        preferencesRepository.save(preferences);
     }
 }
