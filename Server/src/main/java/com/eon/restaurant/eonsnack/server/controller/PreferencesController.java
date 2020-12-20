@@ -2,6 +2,7 @@ package com.eon.restaurant.eonsnack.server.controller;
 
 import com.eon.restaurant.eonsnack.server.entity.User;
 import com.eon.restaurant.eonsnack.server.payload.request.PreferencesRequest;
+import com.eon.restaurant.eonsnack.server.security.jwt.JwtUtils;
 import com.eon.restaurant.eonsnack.server.service.PreferencesService;
 import com.eon.restaurant.eonsnack.server.service.UserService;
 import org.springframework.http.MediaType;
@@ -17,6 +18,7 @@ public class PreferencesController {
     private final PreferencesService preferencesService;
 
     private final UserService userService;
+
 
     public PreferencesController(PreferencesService preferencesService, UserService userService) {
         this.preferencesService = preferencesService;

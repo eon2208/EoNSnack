@@ -31,7 +31,7 @@ public class PreferencesServiceImpl implements PreferencesService {
     public void saveUserPreferences(PreferencesRequest preferencesRequest, User user) {
 
         Set<Tags> tagsSet = new HashSet<>(tagsService.findAllByIdList(preferencesRequest.getTagsId()));
-        Set<Cuisines> cuisinesSet = new HashSet<>(cuisinesService.findAllByIdList(preferencesRequest.getTagsId()));
+        Set<Cuisines> cuisinesSet = new HashSet<>(cuisinesService.findAllByIdList(preferencesRequest.getCuisinesId()));
 
         Preferences preferences = getPreferencesForCurrentUser(user);
 
@@ -48,6 +48,7 @@ public class PreferencesServiceImpl implements PreferencesService {
             preferences = user.getPreferences();
         } else {
             preferences = new Preferences();
+            preferences.setUser(user);
         }
         return preferences;
     }
