@@ -1,11 +1,9 @@
 package com.eon.restaurant.eonsnack.server.controller;
 
-import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.eon.restaurant.eonsnack.server.entity.Tags;
 import com.eon.restaurant.eonsnack.server.model.TagModel;
 import com.eon.restaurant.eonsnack.server.model.assembler.TagModelAssembler;
 import com.eon.restaurant.eonsnack.server.service.TagsService;
-import com.sun.xml.bind.v2.runtime.unmarshaller.TagName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,14 +12,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RepositoryRestController

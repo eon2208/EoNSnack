@@ -1,6 +1,5 @@
 package com.eon.restaurant.eonsnack.server.controller;
 
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;

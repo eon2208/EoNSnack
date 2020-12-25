@@ -1,13 +1,9 @@
 package com.eon.restaurant.eonsnack.server.controller;
 
 import com.eon.restaurant.eonsnack.server.entity.Address;
-import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.eon.restaurant.eonsnack.server.model.AddressModel;
-import com.eon.restaurant.eonsnack.server.model.RestaurantModel;
 import com.eon.restaurant.eonsnack.server.model.assembler.AddressModelAssembler;
 import com.eon.restaurant.eonsnack.server.service.AddressService;
-import com.eon.restaurant.eonsnack.server.service.RestaurantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 @RepositoryRestController
