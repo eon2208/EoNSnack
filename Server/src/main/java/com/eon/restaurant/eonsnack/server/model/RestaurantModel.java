@@ -27,6 +27,6 @@ public class RestaurantModel extends RepresentationModel<RestaurantModel> {
     private Geolocation geolocation;
     private Address address;
 
-    private List<MealModel> meals;
-    private List<CuisineModel> cuisinesList;
+    private Set<Meal> meals;
+    private Set<Cuisines> cuisinesList;
 }

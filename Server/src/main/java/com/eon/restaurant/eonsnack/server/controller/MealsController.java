@@ -28,8 +28,6 @@ public class MealsController {
         this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
-
-
     @GetMapping("meals/{restId}/{tagId}")
     public ResponseEntity<CollectionModel<MealModel>> getMealsForRestaurantAndTag(
             @PathVariable("restId") long restId, @PathVariable("tagId") int tagId) {

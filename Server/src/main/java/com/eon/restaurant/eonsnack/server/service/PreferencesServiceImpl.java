@@ -7,6 +7,7 @@ import com.eon.restaurant.eonsnack.server.repository.PreferencesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -62,5 +63,10 @@ public class PreferencesServiceImpl implements PreferencesService {
         preferences.getRestaurants().add(restaurant);
 
         preferencesRepository.save(preferences);
+    }
+
+    @Override
+    public Optional<Preferences> findByUser(User user) {
+        return preferencesRepository.findByUser(user);
     }
 }
