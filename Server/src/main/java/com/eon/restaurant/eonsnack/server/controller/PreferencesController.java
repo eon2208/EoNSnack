@@ -1,16 +1,12 @@
 package com.eon.restaurant.eonsnack.server.controller;
 
 import com.eon.restaurant.eonsnack.server.entity.User;
-import com.eon.restaurant.eonsnack.server.model.MealModel;
 import com.eon.restaurant.eonsnack.server.model.PreferencesModel;
-import com.eon.restaurant.eonsnack.server.model.RestaurantModel;
 import com.eon.restaurant.eonsnack.server.model.assembler.PreferencesModelAssembler;
 import com.eon.restaurant.eonsnack.server.payload.request.PreferencesRequest;
 import com.eon.restaurant.eonsnack.server.service.PreferencesService;
 import com.eon.restaurant.eonsnack.server.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -65,8 +61,25 @@ public class PreferencesController {
                 .orElseThrow(() -> new ResourceNotFoundException("did not found preferences for this user"));
     }
 
+/*    public ResponseEntity<PreferencesModel> getRestaurantForPreferences(Long id) {
+
+    }
+
+    public ResponseEntity<PreferencesModel> getTagsForPreferences(Long id) {
+    }
+
+    public ResponseEntity<PreferencesModel> getUserForPreferences(Long id) {
+    }
+    @GetMapping("/cuisines")
+    public ResponseEntity<CollectionModel<CuisineModel>> getCuisinesForPreferences(Authentication authentication) {
+    }
+
+    public ResponseEntity<PreferencesModel> getPreferenceById(Long id) {
+
+    }
+
     //get user for preferences
     //get restaurants for preferences
     //get tags for preferences
-    //get cuisines for preferences
+    //get cuisines for preferences*/
 }

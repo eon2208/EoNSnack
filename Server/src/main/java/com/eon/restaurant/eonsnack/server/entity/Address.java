@@ -11,7 +11,10 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "address")
+@Table(name = "address",
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = "formatted")
+})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;

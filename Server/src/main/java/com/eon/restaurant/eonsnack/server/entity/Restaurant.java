@@ -13,7 +13,10 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "restaurant")
+@Table(name = "restaurant",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "restaurant_number")
+        })
 public class Restaurant implements Serializable {
 
     private static final long serialVersionUID = 1L;

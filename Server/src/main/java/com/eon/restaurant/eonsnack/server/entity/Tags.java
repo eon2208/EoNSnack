@@ -3,7 +3,7 @@ package com.eon.restaurant.eonsnack.server.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+
 import java.util.Set;
 
 @Entity
@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "tags",
         uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name"),
+        @UniqueConstraint(columnNames = "name")
 })
 public class Tags {
 

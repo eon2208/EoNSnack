@@ -3,8 +3,10 @@ package com.eon.restaurant.eonsnack.server.model.assembler;
 import com.eon.restaurant.eonsnack.server.controller.MealsController;
 import com.eon.restaurant.eonsnack.server.controller.RestaurantController;
 import com.eon.restaurant.eonsnack.server.entity.Meal;
+import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.eon.restaurant.eonsnack.server.model.MealModel;
 
+import com.eon.restaurant.eonsnack.server.model.RestaurantModel;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
@@ -26,20 +28,27 @@ public class MealModelAssembler extends RepresentationModelAssemblerSupport<Meal
         @Override
         public MealModel toModel(Meal entity) {
 
-            MealModel mealModel = instantiateModel(entity);
+            MealModel mealModel = buildMealModel(entity);
 
             mealModel.add(linkTo(
                     methodOn(RestaurantController.class)
                             .getMealsForRestaurant(entity.getId()))
                     .withRel("restaurant"));
 
-            mealModel.setId(entity.getId());
-            mealModel.setDescription(entity.getDescription());
-            mealModel.setName(entity.getName());
-            mealModel.setPrice(entity.getPrice());
-            mealModel.setTag(entity.getTags());
             return mealModel;
         }
+
+    public MealModel buildMealModel(Meal entity) {
+
+        return MealModel.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .price(entity.getPrice())
+                .restaurant(entity.getRestaurant())
+                .tag(entity.getTags())
+                .build();
+    }
 
         @Override
         public CollectionModel<MealModel> toCollectionModel(Iterable<? extends Meal> entities) {

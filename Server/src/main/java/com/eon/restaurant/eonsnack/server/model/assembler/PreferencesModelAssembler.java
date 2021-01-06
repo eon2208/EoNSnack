@@ -1,10 +1,8 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
 import com.eon.restaurant.eonsnack.server.controller.PreferencesController;
-import com.eon.restaurant.eonsnack.server.controller.TagsController;
 import com.eon.restaurant.eonsnack.server.entity.Preferences;
 import com.eon.restaurant.eonsnack.server.model.PreferencesModel;
-import com.eon.restaurant.eonsnack.server.model.TagModel;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
@@ -26,6 +24,27 @@ public class PreferencesModelAssembler extends RepresentationModelAssemblerSuppo
     public PreferencesModel toModel(Preferences entity) {
 
         PreferencesModel preferencesModel = buildPreferencesModel(entity);
+
+      /*  preferencesModel.add(linkTo(
+                methodOn(PreferencesController.class)
+                        .getPreferenceById(entity.getId()))
+                .withSelfRel());
+        preferencesModel.add(linkTo(
+                methodOn(PreferencesController.class)
+                        .getUserForPreferences(entity.getId()))
+                .withRel("tags"));
+        preferencesModel.add(linkTo(
+                methodOn(PreferencesController.class)
+                        .getCuisinesForPreferences(entity.getId()))
+                .withRel("meals"));
+        preferencesModel.add(linkTo(
+                methodOn(PreferencesController.class)
+                        .getTagsForPreferences(entity.getId()))
+                .withRel("cuisines"));
+        preferencesModel.add(linkTo(
+                methodOn(PreferencesController.class)
+                        .getRestaurantForPreferences(entity.getId()))
+                .withRel("geolocation"));*/
 
         return preferencesModel;
     }

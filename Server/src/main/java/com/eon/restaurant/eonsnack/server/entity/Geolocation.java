@@ -11,7 +11,10 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "geolocation")
+@Table(name = "geolocation",uniqueConstraints = {
+        @UniqueConstraint(columnNames = "longitude"),
+        @UniqueConstraint(columnNames = "latitude")
+})
 public class Geolocation implements Serializable {
 
     private static final long serialVersionUID = 1L;
