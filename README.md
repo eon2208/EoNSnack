@@ -10,7 +10,7 @@ By adding restaurants and meals alghoritm automatically generate list of recomme
 
 ## Tech stack:
 ### Frontend: 
-+ Angular CLI v. 10
++ Angular CLI
 + Angular Material UI Component library (mat-table, mat-buttons, mat-dialog, color theme Indigo-pink).
 + Toastr notifications
 
@@ -18,6 +18,9 @@ By adding restaurants and meals alghoritm automatically generate list of recomme
 + Spring Boot
 + Spring Data JPA
 + Spring Security
++ Java Flux
++ Swagger
++ Docker
 + HATEOAS
 + MySQL
 + Hibernate
