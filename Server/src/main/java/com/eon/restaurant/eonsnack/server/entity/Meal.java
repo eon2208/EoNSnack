@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -32,6 +33,9 @@ public class Meal implements Serializable {
             length = 500)
     private String description;
 
+    @OneToMany(mappedBy = "meal")
+    private Set<OrderDetails> orderDetails;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
@@ -39,5 +43,4 @@ public class Meal implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tag_id")
     private Tags tags;
-
 }

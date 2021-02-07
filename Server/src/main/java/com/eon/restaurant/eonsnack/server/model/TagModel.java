@@ -1,6 +1,5 @@
 package com.eon.restaurant.eonsnack.server.model;
 
-import com.eon.restaurant.eonsnack.server.entity.Preferences;
 import com.eon.restaurant.eonsnack.server.entity.Restaurant;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

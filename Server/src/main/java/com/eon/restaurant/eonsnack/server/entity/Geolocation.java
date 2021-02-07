@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,5 +29,8 @@ public class Geolocation implements Serializable {
 
     @Column(name = "latitude")
     private double lat;
+
+    @OneToMany(mappedBy = "gelocation")
+    private Set<OrderHeader> orderHeaders;
 
 }

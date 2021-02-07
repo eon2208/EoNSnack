@@ -1,7 +1,6 @@
 package com.eon.restaurant.eonsnack.server.model.assembler;
 
 import com.eon.restaurant.eonsnack.server.controller.PreferencesController;
-import com.eon.restaurant.eonsnack.server.entity.Preferences;
 import com.eon.restaurant.eonsnack.server.model.PreferencesModel;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class PreferencesModelAssembler extends RepresentationModelAssemblerSupport<Preferences, PreferencesModel> {

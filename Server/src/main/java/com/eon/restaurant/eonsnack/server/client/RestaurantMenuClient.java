@@ -49,6 +49,9 @@ public class RestaurantMenuClient {
 
     RestTemplate restTemplate;
 
+    public RestaurantMenuClient() {
+    }
+
     public RestaurantMenuClient(RestTemplateBuilder restTemplateBuilder) {
         restTemplate = restTemplateBuilder.build();
     }

@@ -60,9 +60,6 @@ public class Restaurant implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "cuisine_id"))
     private Set<Cuisines> cuisinesList;
 
-    @ManyToMany(mappedBy = "restaurants")
-    private Set<Preferences> preferences;
-
     public Restaurant(long id ,String restName, Set<Cuisines> cuisines){
         this.id = id;
         this.restName = restName;
